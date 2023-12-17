@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\site\RhController;
 use App\Http\Controllers\site\RoomsController;
+use App\Http\Controllers\site\JobsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,13 @@ Route::namespace(value: 'site')->group(function () {
     Route::get('/rooms/{room}/editar', [RoomsController::class, 'edit'])->name('rooms.edit');
     Route::put('/rooms/{room}/', [RoomsController::class, 'update'])->name('rooms.update');
     Route::delete('/rooms/{room}/', [RoomsController::class, 'destroy'])->name('rooms.destroy');
+
+
+    Route::get('/jobs', [JobsController::class, 'index'])->name('jobs.index');
+    Route::get('/jobs/adicionar', [JobsController::class, 'create'])->name('jobs.create');
+    Route::post('/jobs/salvar', [JobsController::class, 'store'])->name('jobs.store');
+    Route::get('/jobs/{job}', [JobsController::class, 'show'])->name('jobs.show');
+    Route::get('/jobs/{job}/editar', [JobsController::class, 'edit'])->name('jobs.edit');
+    Route::put('/jobs/{job}/', [JobsController::class, 'update'])->name('jobs.update');
+    Route::delete('/jobs/{job}/', [JobsController::class, 'destroy'])->name('jobs.destroy');
 });
