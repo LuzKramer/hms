@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-
+@extends('master')
+@section('content')
     <div>
-        <h1> salas</h1>
+        <h1>salas</h1>
         <ul>
             @foreach ($rooms as $room)
-                <li>{{ $room->room }},{{ $room->name }},{{ $room->descript }} | <a
-                        href="{{ route('rooms.edit', ['room' => $room->room]) }}">editar</a> <a href="">excluir</a>
+                @php $txt = $room->occupied ? "ocupado" : "livre"; @endphp
+                <li>{{ $room->name }}, {{ $room->descript }}, {{ $txt }}
+                    <button><a href="{{ route('rooms.confirm', ['room' => $room->room]) }}">confirmar uso</a></button>
+                    <button><a href="{{ route('rooms.show', ['room' => $room->room]) }}">informações da sala</a></button>
                 </li>
             @endforeach
         </ul>
-
     </div>
-</body>
-
-</html>
+@endsection

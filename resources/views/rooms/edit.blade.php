@@ -1,10 +1,15 @@
 @extends('master')
 
 @section('content')
-    {{ $room->name }}
-    <form action="" method="POST">
+    <div>
+        @if (session()->has('message'))
+            {{ session()->get('message') }}
+        @endif
+    </div>
+    <form action="{{ route('rooms.update', ['room' => $room->room]) }}" method="post">
         @csrf
-        @method('PUT')
+        <input type="hidden" name="_method" value="PUT">
+
         <h2>Editar</h2>
 
         <label for="name">Nome:</label>
@@ -17,7 +22,7 @@
         <select name="room_type_id" id="room_type_id">
             <!-- Adicione opções dinamicamente com base nos seus dados -->
             @foreach ($room_types as $room_type)
-                <option value="{{ $room_type->name}}"
+                <option value="{{ $room_type->name }}"
                     {{ $room_type->room_type_id == $room->room_type_id ? 'selected' : '' }}>
                     {{ $room_type->name }}
                 </option>
@@ -46,3 +51,4 @@
         <button type="submit">Salvar</button>
     </form>
 @endsection
+b

@@ -8,21 +8,26 @@
 </head>
 
 <body>
-    <form action="{{route('room.add'}}" method="POST">
+    <div>
+        @if (session()->has('message'))
+            {{ session()->get('message') }}
+        @endif
+    </div>
+    <form action="{{ route('rooms.store') }}" method="POST">
         @csrf
-        @method('post')
+
         <h2>Editar</h2>
         <label for="name">Nome:</label>
         <input type="text" name="name" id="name">
 
         <label for="floor">Andar:</label>
-        <input type="number" name="floor"  id="floor">
+        <input type="number" name="floor" id="floor">
 
         <label for="block">Bloco:</label>
         <select name="block" id="block">
             <!-- Add options dynamically based on your data -->
             @foreach ($room_types as $room_type)
-                <option value="{{ $room_type->name}}" {{ $room_type->name == $room->room_type ? 'selected' : '' }}>
+                <option value="{{ $room_type->name }}" {{ $room_type->name == $room->room_type ? 'selected' : '' }}>
                     {{ $room_type->name }}
                 </option>
             @endforeach
@@ -40,11 +45,7 @@
         <label for="descript">Descrição:</label>
         <textarea name="descript" id="descript" cols="30" rows="10"></textarea>
 
-        <label for="occupied">Ocupado:</label>
-        <select name="occupied" id="occupied">
-            <option value="1" {{ $room->occupied ? 'selected' : '' }}>Sim</option>
-            <option value="0" {{ !$room->occupied ? 'selected' : '' }}>Não</option>
-        </select>
+
 
         <button type="submit">Salvar</button>
     </form>

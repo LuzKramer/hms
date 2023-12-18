@@ -27,20 +27,22 @@ Route::namespace(value: 'site')->group(function () {
 
     Route::get('/rh', [RhController::class, 'index'])->name('rh.index');
 
-    Route::get('/rooms', [RoomsController::class, 'index'])->name('rooms.index');
-    Route::get('/rooms/adicionar', [RoomsController::class, 'create'])->name('rooms.create');
-    Route::post('/rooms/salvar', [RoomsController::class, 'store'])->name('rooms.store');
-    Route::get('/rooms/{room}', [RoomsController::class, 'show'])->name('rooms.show');
-    Route::get('/rooms/{room}/editar', [RoomsController::class, 'edit'])->name('rooms.edit');
-    Route::put('/rooms/{room}/', [RoomsController::class, 'update'])->name('rooms.update');
-    Route::delete('/rooms/{room}/', [RoomsController::class, 'destroy'])->name('rooms.destroy');
+    Route::get('/salas', [RoomsController::class, 'index'])->name('rooms.index');
+    Route::get('/salas/adm', [RoomsController::class, 'adm'])->name('rooms.adm');
+    Route::get('/salas/adicionar', [RoomsController::class, 'create'])->name('rooms.create');
+    Route::post('/salas/salvar', [RoomsController::class, 'store'])->name('rooms.store');
+    Route::get('/salas/{room}', [RoomsController::class, 'show'])->name('rooms.show');
+    Route::get('/salas/{room}/editar', [RoomsController::class, 'edit'])->name('rooms.edit');
+    Route::get('/salas/{room}/comfirm', [RoomsController::class, 'confirm'])->name('rooms.confirm');
+    Route::put('/salas/{room}/', [RoomsController::class, 'update'])->name('rooms.update');
+    Route::delete('/salas/{room}/', [RoomsController::class, 'destroy'])->name('rooms.destroy');
 
 
-    Route::get('/jobs', [JobsController::class, 'index'])->name('jobs.index');
-    Route::get('/jobs/adicionar', [JobsController::class, 'create'])->name('jobs.create');
-    Route::post('/jobs/salvar', [JobsController::class, 'store'])->name('jobs.store');
-    Route::get('/jobs/{job}', [JobsController::class, 'show'])->name('jobs.show');
-    Route::get('/jobs/{job}/editar', [JobsController::class, 'edit'])->name('jobs.edit');
-    Route::put('/jobs/{job}/', [JobsController::class, 'update'])->name('jobs.update');
-    Route::delete('/jobs/{job}/', [JobsController::class, 'destroy'])->name('jobs.destroy');
+    Route::get('/profissoes', [JobsController::class, 'index'])->name('jobs.index');
+    Route::get('/profissoes/adicionar', [JobsController::class, 'create'])->name('jobs.create');
+    Route::post('/profissoes/salvar', [JobsController::class, 'store'])->name('jobs.store');
+    Route::get('/profissoes/{job}', [JobsController::class, 'show'])->name('jobs.show');
+    Route::get('/profissoes/{job}/editar', [JobsController::class, 'edit'])->name('jobs.edit');
+    Route::put('/profissoes/{job}/', [JobsController::class, 'update'])->name('jobs.update');
+    Route::delete('/profissoes/{job}/', [JobsController::class, 'destroy'])->name('jobs.destroy');
 });
