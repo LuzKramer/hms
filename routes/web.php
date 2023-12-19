@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\site\RhController;
 use App\Http\Controllers\site\RoomsController;
 use App\Http\Controllers\site\JobsController;
+use App\Http\Controllers\site\PatientsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +46,13 @@ Route::namespace(value: 'site')->group(function () {
     Route::get('/profissoes/{job}/editar', [JobsController::class, 'edit'])->name('jobs.edit');
     Route::put('/profissoes/{job}/', [JobsController::class, 'update'])->name('jobs.update');
     Route::delete('/profissoes/{job}/', [JobsController::class, 'destroy'])->name('jobs.destroy');
+
+
+    Route::get('/pacientes', [PatientsController::class, 'index'])->name('patients.index');
+    Route::get('/pacientes/adicionar', [PatientsController::class, 'create'])->name('patients.create');
+    Route::post('/pacientes/salvar', [PatientsController::class, 'store'])->name('patients.store');
+    Route::get('/pacientes/{patient}', [PatientsController::class, 'show'])->name('patients.show');
+    Route::get('/pacientes/{patient}/editar', [PatientsController::class, 'edit'])->name('patients.edit');
+    Route::put('/pacientes/{patient}/', [PatientsController::class, 'update'])->name('patients.update');
+    Route::delete('/pacientes/{patient}/', [PatientsController::class, 'destroy'])->name('patients.destroy');
 });

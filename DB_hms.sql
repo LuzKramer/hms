@@ -37,18 +37,6 @@ CREATE TABLE actions (
     name VARCHAR(255)
 );
 
-CREATE TABLE persons (
-    person SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    cpf VARCHAR(14) unique,
-    codsus INT unique,
-    fone VARCHAR(15),
-    email VARCHAR(255),
-    img VARCHAR(255),
-    blood INT,
-    FOREIGN KEY (blood) REFERENCES bloods(blood)
-);
-
 CREATE TABLE jobs (
     job SERIAL PRIMARY KEY,
     name VARCHAR(255),
@@ -75,26 +63,37 @@ CREATE TABLE rooms (
 
 CREATE TABLE workers (
     worker SERIAL PRIMARY KEY,
-    person INT,
     job INT,
     specialization INT,
     password VARCHAR(255),
     descript TEXT,
     level INT,
-    FOREIGN KEY (person) REFERENCES persons(person),
+    name VARCHAR(255),
+    cpf VARCHAR(14) UNIQUE,
+    fone VARCHAR(15),
+    email VARCHAR(255),
+    img VARCHAR(255),
+    blood INT,
+    FOREIGN KEY (blood) REFERENCES bloods(blood),
     FOREIGN KEY (job) REFERENCES jobs(job),
     FOREIGN KEY (specialization) REFERENCES specializations(specialization)
 );
 
 CREATE TABLE patients (
     patient SERIAL PRIMARY KEY,
-    person INT,
     born DATE,
     allergies TEXT,
     monitoring VARCHAR(255),
     prediseases TEXT,
     urgency INT,
-    FOREIGN KEY (person) REFERENCES persons(person)
+    name VARCHAR(255),
+    cpf VARCHAR(14) UNIQUE,
+    codsus INT UNIQUE,
+    fone VARCHAR(15),
+    email VARCHAR(255),
+    img VARCHAR(255),
+    blood INT,
+    FOREIGN KEY (blood) REFERENCES bloods(blood)
 );
 
 CREATE TABLE products (
@@ -193,13 +192,12 @@ CREATE TABLE surgeries (
 
 CREATE TABLE visitors (
     visitor SERIAL PRIMARY KEY,
-    person INT,
+    person_name VARCHAR(255),
     patient INT,
     date DATE,
     hour TIME,
     are BOOLEAN,
     room INT,
-    FOREIGN KEY (person) REFERENCES persons(person),
     FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (room) REFERENCES rooms(room)
 );
@@ -216,7 +214,7 @@ CREATE TABLE used_rooms (
 
 CREATE TABLE calls (
     call SERIAL PRIMARY KEY,
-    person INT,
+    patient INT,
     date DATE,
-    FOREIGN KEY (person) REFERENCES persons(person)
+    FOREIGN KEY (patient) REFERENCES patients(patient)
 );
