@@ -1,26 +1,31 @@
 @extends('master')
 @section('content')
+    <div>
+        @if (session()->has('message'))
+            {{ session()->get('message') }}
+        @endif
+    </div>
     <h1>edit paciente </h1>
-    <form action="{{ route('patients.update', ['patient'=>$patient->patient]) }}" method="POST">
+    <form action="{{ route('patients.update', ['patient' => $patient->patient]) }}" method="POST">
         @csrf
         <input type="hidden" name="_method" value="PUT">
         <label for="name">Nome:</label>
-        <input type="text" name="name" id="name" value="{{$patient->name}}">
+        <input type="text" name="name" id="name" value="{{ $patient->name }}">
 
         <label for="email">E-mail:</label>
-        <input type="email" name="email" id="email" value="{{$patient->email}}">
+        <input type="email" name="email" id="email" value="{{ $patient->email }}">
 
         <label for="fone">Telefone:</label>
-        <input type="text" name="fone" id="fone" value="{{$patient->fone}}">
+        <input type="text" name="fone" id="fone" value="{{ $patient->fone }}">
 
         <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" id="cpf" value="{{$patient->cpf}}">
+        <input type="text" name="cpf" id="cpf" value="{{ $patient->cpf }}">
 
         <label for="codsus">Cadastro SUS:</label>
-        <input type="text" name="codsus" id="codsus" value="{{$patient->codsus}}" >
+        <input type="text" name="codsus" id="codsus" value="{{ $patient->codsus }}">
 
         <label for="cares">Recebe cuidados:</label>
-        <select name="cares" id="cares" >
+        <select name="cares" id="cares">
             <option value="true">Sim</option>
             <option value="false">Não</option>
         </select>
@@ -33,10 +38,10 @@
         </select>
 
         <label for="prediseases">Pré-existentes:</label>
-        <textarea name="prediseases" id="prediseases" cols="30" rows="10">{{$patient->prediseases}}"</textarea>
+        <textarea name="prediseases" id="prediseases" cols="30" rows="10">{{ $patient->prediseases }}"</textarea>
 
         <label for="allergies">Alergias:</label>
-        <textarea name="allergies" id="allergies" cols="30" rows="10">{{$patient->allergies}}"</textarea>
+        <textarea name="allergies" id="allergies" cols="30" rows="10">{{ $patient->allergies }}"</textarea>
 
         <label for="urgency">Urgência:</label>
         <select name="urgency" id="urgency">

@@ -1,6 +1,11 @@
 @extends('master')
 @section('content')
     <h1>edit paciente </h1>
+    <div>
+        @if (session()->has('message'))
+            {{ session()->get('message') }}
+        @endif
+    </div>
     <form action="{{ route('patients.store') }}" method="POST">
         @csrf
         <label for="name">Nome:</label>
