@@ -80,20 +80,20 @@ Route::namespace(value: 'site')->group(function () {
     Route::put('/pacientes/{patient}/', [PatientsController::class, 'update'])->name('patients.update');
     Route::delete('/pacientes/{patient}/', [PatientsController::class, 'destroy'])->name('patients.destroy');
 
-    Route::get('/farmacia', [PharmaController::class, 'index'])->name('pharma.index');
-    Route::get('/farmacia/adicionar-produto', [PharmaController::class, 'create'])->name('pharma.create');
-    Route::post('/farmacia/salvar-pruduto', [PharmaController::class, 'store'])->name('pharma.save');
-    Route::get('/farmacia/exibir-produto/{product}', [PharmaController::class, 'show'])->name('pharma.product');
-    Route::get('/farmacia/editar-product/{product}', [PharmaController::class, 'edit'])->name('pharma.edit');
-    Route::put('/farmacia/atualizar-product/{product}', [PharmaController::class, 'update'])->name('pharma.update');
-    Route::delete('/farmacia/excluir-product/{product}', [PharmaController::class, 'destroy'])->name('pharma.destroy');
+    Route::get('/farmacia/produtos/categorias', [PharmaController::class, 'index_cat'])->name('pharma.index_cat');
+    Route::get('/farmacia/produtos/{category}', [PharmaController::class, 'index_prod'])->name('pharma.index_prod');
+    Route::get('/farmacia/produtos/adicionar', [PharmaController::class, 'create_prod'])->name('pharma.create_prod');
+    Route::get('/farmacia/produtos/{product}', [PharmaController::class, 'show_prod'])->name('pharma.show_prod');
+    Route::post('/farmacia/produtos/salvar', [PharmaController::class, 'store_prod'])->name('pharma.store_prod');
+    Route::get('/farmacia/produtos/editar/{product}', [PharmaController::class, 'edit_prod'])->name('pharma.edit_prod');
+    Route::put('/farmacia/produtos/atualizar/{product}', [PharmaController::class, 'update_prod'])->name('pharma.update_prod');
+    Route::delete('/farmacia/produtos/excluir/{product}', [PharmaController::class, 'destroy_prod'])->name('pharma.destroy_prod');
 
     Route::get('/farmacia/companias/', [CompaniesController::class, 'index'])->name('companies.index');
     Route::get('/farmacia/companias/adicionar', [CompaniesController::class, 'create'])->name('companies.create');
-    Route::post('/farmacia/companias/salvar', [CompaniesController::class, 'store'])->name('companies.save');
     Route::get('/farmacia/companias/{company}', [CompaniesController::class, 'show'])->name('companies.product');
+    Route::post('/farmacia/companias/salvar', [CompaniesController::class, 'store'])->name('companies.save');
     Route::get('/farmacia/companias/editar/{company}', [CompaniesController::class, 'edit'])->name('companies.edit');
     Route::put('/farmacia/companias/atualizar/{company}', [CompaniesController::class, 'update'])->name('companies.update');
     Route::delete('/farmacia/companias/excluir/{company}', [CompaniesController::class, 'destroy'])->name('companies.destroy');
-
 });

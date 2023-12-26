@@ -101,6 +101,7 @@ CREATE TABLE products (
     product_cat INT,
     quantity INT,
     name VARCHAR(255),
+    descript TEXT,
     exp_date DATE,
     company INT,
     generic BOOLEAN,
@@ -152,15 +153,22 @@ CREATE TABLE cares (
     FOREIGN KEY (worker) REFERENCES workers(worker)
 );
 
-CREATE TABLE products_requests (
-    product_request SERIAL PRIMARY KEY,
-    product INT,
-    quantity INT,
+CREATE TABLE requests(
+    request SERIAL PRIMARY KEY,
     date DATE,
     hour TIME,
     worker INT,
-    FOREIGN KEY (product) REFERENCES products(product),
+    done BOOLEAN,
     FOREIGN KEY (worker) REFERENCES workers(worker)
+);
+
+CREATE TABLE products_requests (
+    product_request SERIAL PRIMARY KEY,
+    product INT,
+    request INT,
+    quantity INT,
+    FOREIGN KEY (product) REFERENCES products(product),
+    FOREIGN KEY (request) REFERENCES requests(request)
 );
 
 CREATE TABLE consults (
