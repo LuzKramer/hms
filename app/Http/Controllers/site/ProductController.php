@@ -6,22 +6,28 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PharmaController extends Controller
+class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+
+    public function index_cat()
     {
-        //
+        $categories = DB::table('product_cats')->get();
+
+        return view('products.categories', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    public function index(string $category)
     {
-        //
+        $products = DB::table('products')
+            ->join('product_cats', 'products.product_cat', '=', 'product_cats.product_cat')
+            ->where('product_cats.name', $category) // Change this line to match your category name column
+            ->select('products.*', 'product_cats.name as category_name')
+            ->get();
+
+        // Now you can pass $products and $category to your view
+        return view('products.index', compact('products', 'category'));
     }
 
     /**
@@ -37,7 +43,7 @@ class PharmaController extends Controller
      */
     public function show(string $id)
     {
-        //
+       return view('products.show', ['product'=>$id]);
     }
 
     /**
@@ -63,5 +69,4 @@ class PharmaController extends Controller
     {
         //
     }
-
 }
