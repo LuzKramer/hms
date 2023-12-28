@@ -82,10 +82,11 @@ Route::namespace(value: 'site')->group(function () {
     Route::delete('/pacientes/{patient}/', [PatientsController::class, 'destroy'])->name('patients.destroy');
 
 
-    Route::get('/farmacia/produtos/', [ProductController::class, 'index_cat'])->name('product.index_cat');
+    Route::get('/farmacia/produtos/', [ProductController::class, 'cat'])->name('product.index_cat');
     Route::get('/farmacia/produtos/{category}', [ProductController::class, 'index'])->name('product.index');
-    Route::get('/farmacia/produtos/adicionar', [ProductController::class, 'create'])->name('product.create');
-    Route::get('/farmacia/produtos/{product}', [ProductController::class, 'show'])->name('product.show');
+    Route::get('/farmacia/produtos/adm/{category}/', [ProductController::class, 'adm'])->name('product.adm');
+    Route::get('/farmacia/produto/adicionar', [ProductController::class, 'create'])->name('product.create');
+    Route::get('/farmacia/produto/{product}', [ProductController::class, 'show'])->name('product.show');
     Route::post('/farmacia/produtos/salvar', [ProductController::class, 'store'])->name('product.store');
     Route::get('/farmacia/produtos/editar/{product}', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('/farmacia/produtos/atualizar/{product}', [ProductController::class, 'update'])->name('product.update');
