@@ -23,12 +23,13 @@
         <label for="floor">Andar:</label>
         <input type="number" name="floor" id="floor">
 
-        <label for="block">Bloco:</label>
-        <select name="block" id="block">
+        <label for="room_type">tipo:</label>
+        <select name="room_type" id="room_type">
             <!-- Add options dynamically based on your data -->
             @foreach ($room_types as $room_type)
-                <option value="{{ $room_type->name }}" {{ $room_type->name == $room->room_type ? 'selected' : '' }}>
+                <option value="{{ $room_type->room_type }}">
                     {{ $room_type->name }}
+                </option>
                 </option>
             @endforeach
         </select>
@@ -36,7 +37,7 @@
         <select name="block" id="block">
             <!-- Add options dynamically based on your data -->
             @foreach ($blocks as $block)
-                <option value="{{ $block->block }}" {{ $block->block == $room->block ? 'selected' : '' }}>
+                <option value="{{ $block->block }}">
                     {{ $block->name }}
                 </option>
             @endforeach
