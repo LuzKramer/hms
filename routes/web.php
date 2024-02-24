@@ -44,7 +44,8 @@ Route::namespace(value: 'site')->group(function () {
 
     Route::get('/', function () {
         return view('home.home');
-    });
+    })->name('home');
+
 
 
 

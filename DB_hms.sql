@@ -65,7 +65,7 @@ CREATE TABLE workers (
     worker SERIAL PRIMARY KEY,
     job INT,
     specialization INT,
-    password VARCHAR(255),
+    salary BOOLEAN,
     descript TEXT,
     level INT,
     name VARCHAR(255),
@@ -100,6 +100,8 @@ CREATE TABLE products (
     product SERIAL PRIMARY KEY,
     product_cat INT,
     quantity INT,
+    sellprice BOOLEAN,
+    price BOOLEAN,
     name VARCHAR(255),
     descript TEXT,
     exp_date DATE,
@@ -225,4 +227,19 @@ CREATE TABLE calls (
     patient INT,
     date DATE,
     FOREIGN KEY (patient) REFERENCES patients(patient)
+);
+
+
+CREATE TABLE incomes(
+    income SERIAL PRIMARY KEY,
+    descript TEXT,
+    value BOOLEAN,
+    date DATE
+);
+
+CREATE TABLE expenses(
+    expense SERIAL PRIMARY KEY,
+    descript TEXT,
+    value BOOLEAN,
+    date DATE
 );

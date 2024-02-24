@@ -33,6 +33,7 @@
                 </option>
             @endforeach
         </select>
+
         <label for="block">Bloco:</label>
         <select name="block" id="block">
             <!-- Add options dynamically based on your data -->
