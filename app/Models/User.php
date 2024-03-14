@@ -21,6 +21,16 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'email_verified_at',
+        'remember_token',
+        'job',
+        'specialization',
+        'salary',
+        'descript',
+        'level',
+        'cpf',
+        'fone',
+        'img',
     ];
 
     /**
@@ -42,4 +52,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+     // Define the relationships with other tables
+    //public function job()
+   // {
+    //    return $this->belongsTo(Job::class, 'job');
+   // }
+
+   // public function specialization()
+    //{
+    //    return $this->belongsTo(Specialization::class, 'specialization');
+    //}
 }
+

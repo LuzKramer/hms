@@ -61,23 +61,47 @@ CREATE TABLE rooms (
     FOREIGN KEY (block) REFERENCES blocks(block)
 );
 
-CREATE TABLE workers (
-    worker SERIAL PRIMARY KEY,
+
+
+
+
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255),
+    email_verified_at TIMESTAMP,
+    remember_token VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     job INT,
     specialization INT,
     salary BOOLEAN,
     descript TEXT,
     level INT,
-    name VARCHAR(255),
     cpf VARCHAR(14) UNIQUE,
     fone VARCHAR(15),
-    email VARCHAR(255),
     img VARCHAR(255),
-    blood INT,
-    FOREIGN KEY (blood) REFERENCES bloods(blood),
     FOREIGN KEY (job) REFERENCES jobs(job),
     FOREIGN KEY (specialization) REFERENCES specializations(specialization)
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 CREATE TABLE patients (
     patient SERIAL PRIMARY KEY,
