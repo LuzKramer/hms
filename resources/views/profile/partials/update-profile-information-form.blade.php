@@ -1,7 +1,7 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+            {{ __('informações do perfil') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
@@ -21,6 +21,16 @@
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        </div>
+        <div>
+            <x-input-label for="cpf" :value="__('CPF')" />
+            <x-text-input id="cpf" name="cpf" type="text"  size="14" class="mt-1 block w-full" :value="old('cpf', $user->cpf)" required autofocus autocomplete="cpf" />
+            <x-input-error class="mt-2" :messages="$errors->get('cpf')" />
+        </div>
+        <div>
+            <x-input-label for="fone" :value="__('fone')" />
+            <x-text-input id="fone" name="fone" type="text"  size="14" class="mt-1 block w-full" :value="old('fone', $user->fone)" required autofocus autocomplete="fone" />
+            <x-input-error class="mt-2" :messages="$errors->get('fone')" />
         </div>
 
         <div>
@@ -47,8 +57,14 @@
             @endif
         </div>
 
+        <div>
+        <x-input-label for="salary" :value="__('SALARIO')" />
+            <x-text-input id="salary" name="salary" type="text"  class="mt-1 block w-full" :value="old('salary', $user->salary)" required autofocus autocomplete="salary" />
+            <x-input-error class="mt-2" :messages="$errors->get('salary')" />
+        </div>
+
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Salvar') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p
@@ -57,7 +73,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                >{{ __('Salvo.') }}</p>
             @endif
         </div>
     </form>

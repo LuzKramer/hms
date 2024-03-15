@@ -78,11 +78,11 @@ CREATE TABLE users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     job INT,
     specialization INT,
-    salary BOOLEAN,
+    salary INT,
     descript TEXT,
     level INT,
     cpf VARCHAR(14) UNIQUE,
-    fone VARCHAR(15),
+    fone INT,
     img VARCHAR(255),
     FOREIGN KEY (job) REFERENCES jobs(job),
     FOREIGN KEY (specialization) REFERENCES specializations(specialization)
