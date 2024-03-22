@@ -81,7 +81,7 @@ CREATE TABLE users (
     salary INT,
     descript TEXT,
     level INT,
-    cpf VARCHAR(14) UNIQUE,
+    cpf INT UNIQUE,
     fone INT,
     img VARCHAR(255),
     FOREIGN KEY (job) REFERENCES jobs(job),

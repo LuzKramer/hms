@@ -58,10 +58,27 @@
         </div>
 
         <div>
-        <x-input-label for="salary" :value="__('SALARIO')" />
-            <x-text-input id="salary" name="salary" type="text"  class="mt-1 block w-full" :value="old('salary', $user->salary)" required autofocus autocomplete="salary" />
-            <x-input-error class="mt-2" :messages="$errors->get('salary')" />
+            <x-input-label for="job" :value="__('Profissão')" />
+            <select name="job" id="job">
+                @foreach ($jobs as $job)
+                    <option value="{{$job->job}}" {{old('job', $user->job) == $job->job ? 'selected' : ''}}>{{$job->name}}</option>
+
+                @endforeach
+            </select>
         </div>
+        <div>
+            <x-input-label for="specialization" :value="__('Especialidade')" />
+            <select name="specialization" id="specialization">
+
+                @foreach($specializs as $specialty)
+                    <option value="{{$specialty->specialization}}" {{old('specialization', $user->specialization) == $specialty->specialization ? 'selected' : ''}}>{{$specialty->name}}</option>
+                @endforeach
+
+            </select>
+        </div>
+
+        <div>
+
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Salvar') }}</x-primary-button>

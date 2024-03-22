@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\job;
+use App\Models\specialization;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +22,14 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $jobs =  job::all();
+        $specializs =  specialization::all();
+
+        return view('auth.register', [
+
+            'specializs' => $specializs,
+            'jobs' => $jobs
+        ]);
     }
 
     /**
@@ -34,12 +43,21 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'cpf' => ['required', 'string', 'max:11', 'unique:'.User::class],
+            'job' => ['required', 'integer'],
+            'specialization' => ['required', 'integer'],
+            'fone' => ['required', 'string', 'max:15']
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'cpf' => $request->cpf,
+            'job' => $request->job,
+            'specialization' => $request->specialization,
+            'fone' => $request->fone
+
         ]);
 
         event(new Registered($user));
