@@ -1,0 +1,7 @@
+nivel de acesso no banco:{
+  1 -> adm
+  2 -> rh
+  3 -> medico
+  4 -> enfermeiro
+  5 -> tecnico de infermagen
+}
