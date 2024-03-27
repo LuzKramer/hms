@@ -81,7 +81,7 @@ CREATE TABLE users (
     salary INT,
     descript TEXT,
     level INT,
-    cpf VARCHAR(14) UNIQUE,
+    cpf VARCHAR(11) UNIQUE,
     fone INT,
     img VARCHAR(255),
     FOREIGN KEY (job) REFERENCES jobs(job),
@@ -141,7 +141,7 @@ CREATE TABLE shifts (
     hour TIME,
     worker INT,
     descript TEXT,
-    FOREIGN KEY (worker) REFERENCES workers(worker)
+    FOREIGN KEY (worker) REFERENCES users(id)
 );
 
 CREATE TABLE medications (
@@ -154,7 +154,7 @@ CREATE TABLE medications (
     hour TIME,
     FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (product) REFERENCES products(product),
-    FOREIGN KEY (worker) REFERENCES workers(worker)
+    FOREIGN KEY (worker) REFERENCES users(id)
 );
 
 CREATE TABLE diagnostics (
@@ -176,7 +176,7 @@ CREATE TABLE cares (
     ok BOOLEAN,
     FOREIGN KEY (action) REFERENCES actions(action),
     FOREIGN KEY (patient) REFERENCES patients(patient),
-    FOREIGN KEY (worker) REFERENCES workers(worker)
+    FOREIGN KEY (worker) REFERENCES users(id)
 );
 
 CREATE TABLE requests(
@@ -185,7 +185,7 @@ CREATE TABLE requests(
     hour TIME,
     worker INT,
     done BOOLEAN,
-    FOREIGN KEY (worker) REFERENCES workers(worker)
+    FOREIGN KEY (worker) REFERENCES users(id)
 );
 
 CREATE TABLE products_requests (
@@ -206,21 +206,19 @@ CREATE TABLE consults (
     room INT,
     ok BOOLEAN,
     FOREIGN KEY (patient) REFERENCES patients(patient),
-    FOREIGN KEY (worker) REFERENCES workers(worker),
+    FOREIGN KEY (worker) REFERENCES users(id),
     FOREIGN KEY (room) REFERENCES rooms(room)
 );
 
 CREATE TABLE surgeries (
     surgery SERIAL PRIMARY KEY,
-    worker1 INT,
-    worker2 INT,
+    worker INT,
     patient INT,
     room INT,
     hour TIME,
     date DATE,
     FOREIGN KEY (patient) REFERENCES patients(patient),
-    FOREIGN KEY (worker1) REFERENCES workers(worker),
-    FOREIGN KEY (worker2) REFERENCES workers(worker),
+    FOREIGN KEY (worker) REFERENCES users(id),
     FOREIGN KEY (room) REFERENCES rooms(room)
 );
 

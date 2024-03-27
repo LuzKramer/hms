@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\site;
 
 use App\Http\Controllers\Controller;
+use App\Models\job;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,10 +14,10 @@ class JobsController extends Controller
      */
     public function index()
     {
-        $jobs = DB::table('jobs')->get();
 
 
-        return view('jobs.jobs', ['jobs' => $jobs]);
+
+        return view('jobs.jobs', ['jobs' => job::all()]);
     }
 
     /**

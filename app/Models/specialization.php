@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class job extends Model
+class specialization extends Model
 {
-    protected $table = 'jobs';
+    protected $table = 'specializations';
     use HasFactory;
 
     protected $fillable = [
-        'job',
+        'specialization',
         'name',
         'description',
 
