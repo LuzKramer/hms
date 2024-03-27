@@ -1,11 +1,19 @@
 <section class="space-y-6">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
+<<<<<<< HEAD
             {{ __('Delete Account') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
             {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
+=======
+            {{ __('Deletar  Usuario') }}
+        </h2>
+
+        <p class="mt-1 text-sm text-gray-600">
+            {{ __('Uma vez que sua conta seja excluída, todos os seus recursos e dados serão excluídos permanentemente. Antes de excluir sua conta, por favor, faça o download de qualquer dado ou informação que deseje manter.') }}
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
         </p>
     </header>
 
@@ -24,7 +32,11 @@
             </h2>
 
             <p class="mt-1 text-sm text-gray-600">
+<<<<<<< HEAD
                 {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+=======
+                {{ __('Uma vez que sua conta seja excluída, todos os seus recursos e dados serão excluídos permanentemente. Por favor, insira sua senha para confirmar que você deseja excluir permanentemente sua conta.') }}
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
             </p>
 
             <div class="mt-6">
@@ -47,7 +59,11 @@
                 </x-secondary-button>
 
                 <x-danger-button class="ms-3">
+<<<<<<< HEAD
                     {{ __('Delete Account') }}
+=======
+                    {{ __('Deletar Usuario') }}
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
                 </x-danger-button>
             </div>
         </form>

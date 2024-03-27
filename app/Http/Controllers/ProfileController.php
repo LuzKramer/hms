@@ -3,11 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+<<<<<<< HEAD
+=======
+use App\Models\job;
+use App\Models\specialization;
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\DB;
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 
 class ProfileController extends Controller
 {
@@ -16,8 +25,19 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+<<<<<<< HEAD
         return view('profile.edit', [
             'user' => $request->user(),
+=======
+        $jobs =  job::all();
+        $specializs =  specialization::all();
+
+        return view('profile.edit', [
+            'user' => $request->user(),
+            'specializs' => $specializs,
+            'jobs' => $jobs
+
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
         ]);
     }
 

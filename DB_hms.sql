@@ -61,6 +61,7 @@ CREATE TABLE rooms (
     FOREIGN KEY (block) REFERENCES blocks(block)
 );
 
+<<<<<<< HEAD
 CREATE TABLE workers (
     worker SERIAL PRIMARY KEY,
     job INT,
@@ -75,10 +76,53 @@ CREATE TABLE workers (
     img VARCHAR(255),
     blood INT,
     FOREIGN KEY (blood) REFERENCES bloods(blood),
+=======
+
+
+
+
+
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255),
+    email_verified_at TIMESTAMP,
+    remember_token VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    job INT,
+    specialization INT,
+    salary INT,
+    descript TEXT,
+    level INT,
+    cpf VARCHAR(11) UNIQUE,
+    fone INT,
+    img VARCHAR(255),
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
     FOREIGN KEY (job) REFERENCES jobs(job),
     FOREIGN KEY (specialization) REFERENCES specializations(specialization)
 );
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 CREATE TABLE patients (
     patient SERIAL PRIMARY KEY,
     born DATE,
@@ -117,7 +161,11 @@ CREATE TABLE shifts (
     hour TIME,
     worker INT,
     descript TEXT,
+<<<<<<< HEAD
     FOREIGN KEY (worker) REFERENCES workers(worker)
+=======
+    FOREIGN KEY (worker) REFERENCES users(id)
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 );
 
 CREATE TABLE medications (
@@ -130,7 +178,11 @@ CREATE TABLE medications (
     hour TIME,
     FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (product) REFERENCES products(product),
+<<<<<<< HEAD
     FOREIGN KEY (worker) REFERENCES workers(worker)
+=======
+    FOREIGN KEY (worker) REFERENCES users(id)
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 );
 
 CREATE TABLE diagnostics (
@@ -152,7 +204,11 @@ CREATE TABLE cares (
     ok BOOLEAN,
     FOREIGN KEY (action) REFERENCES actions(action),
     FOREIGN KEY (patient) REFERENCES patients(patient),
+<<<<<<< HEAD
     FOREIGN KEY (worker) REFERENCES workers(worker)
+=======
+    FOREIGN KEY (worker) REFERENCES users(id)
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 );
 
 CREATE TABLE requests(
@@ -161,7 +217,11 @@ CREATE TABLE requests(
     hour TIME,
     worker INT,
     done BOOLEAN,
+<<<<<<< HEAD
     FOREIGN KEY (worker) REFERENCES workers(worker)
+=======
+    FOREIGN KEY (worker) REFERENCES users(id)
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 );
 
 CREATE TABLE products_requests (
@@ -182,21 +242,33 @@ CREATE TABLE consults (
     room INT,
     ok BOOLEAN,
     FOREIGN KEY (patient) REFERENCES patients(patient),
+<<<<<<< HEAD
     FOREIGN KEY (worker) REFERENCES workers(worker),
+=======
+    FOREIGN KEY (worker) REFERENCES users(id),
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
     FOREIGN KEY (room) REFERENCES rooms(room)
 );
 
 CREATE TABLE surgeries (
     surgery SERIAL PRIMARY KEY,
+<<<<<<< HEAD
     worker1 INT,
     worker2 INT,
+=======
+    worker INT,
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
     patient INT,
     room INT,
     hour TIME,
     date DATE,
     FOREIGN KEY (patient) REFERENCES patients(patient),
+<<<<<<< HEAD
     FOREIGN KEY (worker1) REFERENCES workers(worker),
     FOREIGN KEY (worker2) REFERENCES workers(worker),
+=======
+    FOREIGN KEY (worker) REFERENCES users(id),
+>>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
     FOREIGN KEY (room) REFERENCES rooms(room)
 );
 
