@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Diagnostic;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
-class DiagnosticController extends Controller
+class MedicController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+    public function board(){
+        return view('medic.board');
+    }
+
+     public function index()
     {
-        // :0 TEM NADA AQUI!!!!!!!!!
+        //
     }
 
     /**
@@ -21,8 +24,7 @@ class DiagnosticController extends Controller
      */
     public function create()
     {
-        $userId = Session::get('user_id');
-
+        //
     }
 
     /**
@@ -36,7 +38,7 @@ class DiagnosticController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Diagnostic $diagnostic)
+    public function show(string $id)
     {
         //
     }
@@ -44,7 +46,7 @@ class DiagnosticController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Diagnostic $diagnostic)
+    public function edit(string $id)
     {
         //
     }
@@ -52,7 +54,7 @@ class DiagnosticController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Diagnostic $diagnostic)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -60,7 +62,7 @@ class DiagnosticController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Diagnostic $diagnostic)
+    public function destroy(string $id)
     {
         //
     }

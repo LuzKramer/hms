@@ -22,7 +22,7 @@
 <body>
     <header>
         header
-        <h1><a href="{{route('home')}}">suka</a></h1>
+        <h1><a href="">suka</a></h1>
         <h2><a href="{{route('blocks.create')}}">test</a></h2>
     </header>
     <div class="container">
