@@ -9,8 +9,6 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-<<<<<<< HEAD
-=======
         <div>
             <x-input-label for="cpf" :value="__('CPF')" />
             <x-text-input id="cpf" name="cpf" type="text"  size="11" class="mt-1 block w-full" />
@@ -41,7 +39,6 @@
             </select>
         </div>
 
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />

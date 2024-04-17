@@ -11,10 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-<<<<<<< HEAD
-=======
     protected $table = 'users';
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 
     /**
      * The attributes that are mass assignable.
@@ -25,8 +22,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-<<<<<<< HEAD
-=======
         'email_verified_at',
         'remember_token',
         'job',
@@ -37,7 +32,6 @@ class User extends Authenticatable
         'cpf',
         'fone',
         'img',
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
     ];
 
     /**
@@ -59,9 +53,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-<<<<<<< HEAD
-}
-=======
 
 
      // Define the relationships with other tables
@@ -76,4 +67,3 @@ class User extends Authenticatable
     //}
 }
 
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386

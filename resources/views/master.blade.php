@@ -30,6 +30,7 @@
     </div>
     <footer>
         <h1>footer</h1>
+        <P>oi joao</P>
     </footer>
 
 </body>
