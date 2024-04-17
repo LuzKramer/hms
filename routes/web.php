@@ -129,6 +129,6 @@ Route::middleware('medic')->group(function () {
 });
 
 Route::middleware('nurse')->group(function () {
-   Route::get("/diagnostico/adicionar", [DiagnosticController::class, "create"])->name('diagnostic.create   ');
+   Route::get("/diagnostico/adicionar", [DiagnosticController::class, "create"])->name('diagnostic.create');
    Route::post("/diagnostico/salvar", [DiagnosticController::class, "store"])->name('diagnostic.store');
 });

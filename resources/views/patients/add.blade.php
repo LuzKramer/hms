@@ -23,10 +23,10 @@
         <label for="codsus">Cadastro SUS:</label>
         <input type="text" name="codsus" id="codsus">
 
-        <label for="cares">Recebe cuidados:</label>
-        <select name="cares" id="cares">
-            <option value="true">Sim</option>
-            <option value="false">Não</option>
+        <label for="needcare">Recebe cuidados:</label>
+        <select name="needcare" id="needcare">
+            <option value="1">Sim</option>
+            <option value="0">Não</option>
         </select>
 
         <label for="blood">Sangue</label>

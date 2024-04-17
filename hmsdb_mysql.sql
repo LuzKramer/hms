@@ -90,6 +90,7 @@ CREATE TABLE patients (
     prediseases TEXT,
     urgency INT,
     name VARCHAR(255),
+    needcare BOOLEAN,
     cpf VARCHAR(11) UNIQUE,
     codsus INT UNIQUE,
     fone VARCHAR(15),

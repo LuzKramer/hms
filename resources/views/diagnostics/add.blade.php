@@ -15,12 +15,17 @@
     <label for="descript">Diagnostico</label>
     <br><br>
     <label for="patient">Paciente</label>
+    <br>
+    <h3><a href="{{route('patients.create')}}">se nao tem o paciente adicione o aqui</a></h3>
+    <br>
     <select name="patient" >
+
         @foreach ($patients as $patient )
             <option value="{{$patient->patient}}">{{$patient->name}}</option>
 
         @endforeach
     </select>
+    <br>
     <label for="descript">descrição</label>
     <input type="text" name="descript" placeholder="descrição do diagnostico">
 

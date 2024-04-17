@@ -113,6 +113,7 @@ CREATE TABLE patients (
     name VARCHAR(255),
     cpf VARCHAR(14) UNIQUE,
     codsus INT UNIQUE,
+    needcare BOOLEAN,
     fone VARCHAR(15),
     email VARCHAR(255),
     img VARCHAR(255),
