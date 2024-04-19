@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\site;
 
 use App\Models\Diagnostic;
 use App\Models\Disease;
 use App\Models\patient;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DiagnosticController extends Controller
 {

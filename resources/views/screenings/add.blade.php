@@ -53,11 +53,6 @@
 
         <label for="patient">Paciente:</label>
         <input type="text" name="patient" id="patient">
-        <label for="sex">Sexo:</label>
-        <select name="sex" id="sex">
-            <option value="m">Masculino</option>
-            <option value="f">Feminino</option>
-        </select>
 
         <label for="born">Nascimento:</label>
         <input type="date" name="born" id="born">
@@ -93,4 +88,5 @@
 
         <input type="submit" value="Adicionar">
     </form>
+
 @endsection

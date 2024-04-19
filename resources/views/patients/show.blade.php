@@ -11,8 +11,16 @@
         <li>{{ $patient->codsus }}</li>
         <li>{{ $patient->email }}</li>
         <li>{{ $patient->fone }}</li>
-        <li>{{ $patient->allergies }}</li>
-        <li>{{ $patient->prediseases }}</li>
+        <li>{{ $patient->symptoms }}</li>
+        <li>{{ $patient->observations }}</li>
+        <li>{{$patient->medical_history}}</li>
+        <li>{{ $patient->systolic_pressure }}</li>
+        <li>{{ $patient->diastolic_pressure }}</li>
+        <li>{{ $patient->temperature }}</li>
+        <li>{{ $patient->heart_rate }}</li>
+        <p>{{$patient->ai_resp}}</p>
+
+
 
     </ul>
     <button><a href="{{ route('patients.edit', ['patient' => $patient->patient]) }}">editar</a></button>

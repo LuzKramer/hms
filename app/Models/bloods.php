@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class bloods extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'blood',
+];
 }
