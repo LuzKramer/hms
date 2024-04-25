@@ -21,5 +21,18 @@ class GeminiService
 
 
     }
+    public function hasConnection()
+    {
+        try {
+            // Attempt to make a simple HTTP request to a known external website
+            $response = file_get_contents('https://www.google.com');
+
+            // If we get a response, the internet connection is likely working
+            return true;
+        } catch (\Exception $e) {
+            // If an exception occurs, it's likely that there's no internet connection
+            return false;
+        }
+    }
 }
 

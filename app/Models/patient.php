@@ -29,6 +29,8 @@ class patient extends Model
         'systolic_pressure',
         'diastolic_pressure',
         'temperature',
+        'weight',
+        'height',
         'heart_rate',
         'medical_history',
         'observations',

@@ -36,11 +36,12 @@
             @endforeach
         </select>
 
-        <label for="prediseases">Pré-existentes:</label>
-        <textarea name="prediseases" id="prediseases" cols="30" rows="10"></textarea>
 
-        <label for="allergies">Alergias:</label>
-        <textarea name="allergies" id="allergies" cols="30" rows="10"></textarea>
+        <label for="medical_history">Histórico Médico:</label>
+        <textarea name="medical_history" id="medical_history" cols="30" rows="10"></textarea>
+
+        <label for="observations">Observações:</label>
+        <textarea name="observations" id="observations" cols="30" rows="10"></textarea>
 
         <label for="urgency">Urgência:</label>
         <select name="urgency" id="urgency">
@@ -51,8 +52,7 @@
             <option value="5">Extrema</option>
         </select>
 
-        <label for="patient">Paciente:</label>
-        <input type="text" name="patient" id="patient">
+
         <label for="sex">Sexo:</label>
         <select name="sex" id="sex">
             <option value="m">Masculino</option>
@@ -80,14 +80,16 @@
         <label for="temperature">Temperatura °C:</label>
         <input type="number" name="temperature" id="temperature">
 
+        <label for="weight">Peso (kg):</label>
+        <input type="number" name="weight" id="weight">
+
+        <label for="height">Altura (cm):</label>
+        <input type="number" name="height" id="height">
+
+
         <label for="heart_rate">Frequência Cardíaca:</label>
         <input type="number" name="heart_rate" id="heart_rate">
 
-        <label for="medical_history">Histórico Médico:</label>
-        <textarea name="medical_history" id="medical_history" cols="30" rows="10"></textarea>
-
-        <label for="observations">Observações:</label>
-        <textarea name="observations" id="observations" cols="30" rows="10"></textarea>
 
 
 

@@ -24,8 +24,25 @@
         <label for="codsus">Cadastro SUS:</label>
         <input type="text" name="codsus" id="codsus" value="{{ $patient->codsus }}">
 
-        <label for="cares">Recebe cuidados:</label>
-        <select name="cares" id="cares">
+
+        <label for="sex">sexo</label>
+        <select name="sex" id="sex">
+
+            <option value="m">Masculino</option>
+            <option value="f">Feminino</option>
+        </select>
+        <label for="born">Nascimento:</label>
+        <input type="date" name="born" id="born" value="{{ $patient->born }}">
+
+        <label for="weight">Peso:</label>
+        <input type="number" name="weight" id="weight" value="{{ $patient->weight }}">
+
+        <label for="height">Altura:</label>
+        <input type="number" name="height" id="height" value="{{ $patient->height }}">
+
+
+        <label for="needcare">Recebe cuidados:</label>
+        <select name="needcare" id="needcare">
             <option value="true">Sim</option>
             <option value="false">Não</option>
         </select>
@@ -37,11 +54,29 @@
             @endforeach
         </select>
 
-        <label for="prediseases">Pré-existentes:</label>
-        <textarea name="prediseases" id="prediseases" cols="30" rows="10">{{ $patient->prediseases }}"</textarea>
+        <label for="symptoms">Sintomas:</label>
+        <textarea name="symptoms" id="" cols="30" rows="10">{{$patient->symptoms}}</textarea>
 
-        <label for="allergies">Alergias:</label>
-        <textarea name="allergies" id="allergies" cols="30" rows="10">{{ $patient->allergies }}"</textarea>
+        <label for="medical_history">Histórico Médico:</label>
+        <textarea name="medical_history" id="medical_history" cols="30" rows="10">{{ $patient->medical_history }}</textarea>
+
+        <label for="observations">Observações:</label>
+        <textarea name="observations" id="observations" cols="30" rows="10">{{ $patient->observations }}</textarea>
+
+        <label for="systolic_pressure">Pressão Sistolica:</label>
+        <input type="text" name="systolic_pressure" id="systolic_pressure" value="{{ $patient->systolic_pressure }}">
+
+        <label for="diastolic_pressure">Pressão Diastolica:</label>
+        <input type="text" name="diastolic_pressure" id="diastolic_pressure" value="{{ $patient->diastolic_pressure }}">
+
+        <label for="temperature">Temperatura:</label>
+        <input type="text" name="temperature" id="temperature" value="{{ $patient->temperature }}">
+
+        <label for="heart_rate">Frequecia Cardiaca:</label>
+        <input type="text" name="heart_rate" id="heart_rate" value="{{ $patient->heart_rate }}">
+
+
+
 
         <label for="urgency">Urgência:</label>
         <select name="urgency" id="urgency">

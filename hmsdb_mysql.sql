@@ -101,6 +101,8 @@ CREATE TABLE patients (
     systolic_pressure INT,
     diastolic_pressure INT,
     temperature DECIMAL(5,2),
+    weight DECIMAL (5,2),
+    height INT,
     heart_rate INT,
     medical_history TEXT,
     observations TEXT,

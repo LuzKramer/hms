@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/css/styles.css">
     <script src="/js/scripts.js"></script>
 
-    <title>HMS</title>
+    <title>Hospitech</title>
 
 
 </head>

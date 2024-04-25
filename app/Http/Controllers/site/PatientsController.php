@@ -58,8 +58,13 @@ class PatientsController extends Controller
             "Observações: " . $request->observations . ",\n" .
             "Data: " . $date;
 
-        $result = $geminiService->diagnostico($Info);
+            if ($geminiService->hasConnection()) {
+                // Call the GeminiService function for diagnosis
+                $result = $geminiService->diagnostico($Info);
+            } else {
+                $result = "Não foi possivel fazer o diagnostico com a IA !";
 
+            }
 
         $patient = new Patient([
             'name' => $request->name,
@@ -72,6 +77,8 @@ class PatientsController extends Controller
             'email' => $request->email,
             'img' => $request->img,
             'blood' => $request->blood,
+            'weight' => $request->weight,
+            'height' => $request->height,
             'phone' => $request->phone,
             'temperature' => $request->temperature,
             'systolic_pressure' => $request->systolic_pressure,
@@ -92,7 +99,7 @@ class PatientsController extends Controller
 
 
         if ($new) {
-            return redirect()->back()->with('message', 'Paciente adicionado com sucesso!');
+            return redirect(route('patients.show', $patient->patient))->with('message', 'Paciente adicionado com sucesso!');
         }
         return redirect()->back()->with('message', 'Erro ao adicionar!');
     }
@@ -103,8 +110,20 @@ class PatientsController extends Controller
     {
         $patient = patient::find($id);
 
+        if ($patient->height != 0 && $patient->weight != 0) {
+            $height = $patient->height / 100; // Convert height to meters
+            $weight = $patient->weight;
 
-        return view('patients.show', compact('patient'));
+            $imc = $weight / ($height * $height); // Calculate BMI
+
+            $imc = number_format($imc, 2);
+        } else {
+            $imc = null; // Set to null if height or weight is 0
+        }
+
+
+
+        return view('patients.show', compact('patient', 'imc'));
     }
 
     /**
@@ -125,7 +144,7 @@ class PatientsController extends Controller
         $updated = DB::table('patients')->where('patient', $id)->update($request->except(['_token', '_method']));
 
         if ($updated) {
-            return redirect()->back()->with('message', 'atualizado com sucesso!');
+            return redirect(route('patients.show', $id))->with('message', 'Atualizado com sucesso!');
         }
         return redirect()->back()->with(key: 'message', value: 'erro ao atualizar !');
     }
