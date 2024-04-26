@@ -22,12 +22,14 @@ class DiagnosticController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id)
     {
-         $patients = patient::all();
-         $diseases = Disease::all();
 
-        return view('diagnostics.add', compact('patients', 'diseases'));
+         $diseases = Disease::all();
+         $patient = patient::find($id);
+
+
+        return view('diagnostics.add', compact('patient', 'diseases'));
     }
 
     /**

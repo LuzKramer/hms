@@ -38,4 +38,5 @@
 
     </ul>
     <button><a href="{{ route('patients.edit', ['patient' => $patient->patient]) }}">editar</a></button>
+    <button><a href="{{route('diagnostic.create', ['patient' => $patient->patient])}}">fazer um diagnostico</a></button>
 @endsection
