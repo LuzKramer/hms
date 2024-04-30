@@ -152,7 +152,7 @@ CREATE TABLE diagnostics (
     patient INT,
     descript TEXT,
     disease INT,
-    user_id INT
+    user_id INT,
     date DATE,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (patient) REFERENCES patients(patient),
