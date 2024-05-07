@@ -15,10 +15,35 @@
         <input type="email" name="email" id="email">
 
         <label for="fone">Telefone:</label>
-        <input type="text" name="fone" id="fone">
+        <input type="tel" name="fone" id="fone" pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}"
+            placeholder="99-99999-9999">
+
+        <script>
+            document.getElementById('fone').addEventListener('input', function(e) {
+                var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+                e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
+            });
+        </script>
+
+
+
+
+
 
         <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" id="cpf">
+        <input type="tel" name="cpf" id="cpf" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" maxlength="14"
+            placeholder="123.456.789-01">
+
+        <script>
+            document.getElementById('cpf').addEventListener('input', function(e) {
+                var cpf = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+                cpf = cpf.slice(0, 11); // Limit the CPF to 11 digits
+                cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Insert a dot after the third digit
+                cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Insert a dot after the sixth digit
+                cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Insert a hyphen after the ninth digit
+                e.target.value = cpf;
+            });
+        </script>
 
         <label for="codsus">Cadastro SUS:</label>
         <input type="text" name="codsus" id="codsus">

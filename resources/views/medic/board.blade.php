@@ -4,4 +4,5 @@
 <a href="{{route('patients.index')}}">pacientes</a>
 
 
+
 @endsection

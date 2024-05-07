@@ -18,6 +18,7 @@ class patient extends Model
         'born',
         'monitoring',
         'urgency',
+        'room',
         'name',
         'cpf',
         'codsus',

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\site;
 
 use App\Http\Controllers\Controller;
+use App\Models\patient;
+use App\Models\room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -61,8 +63,9 @@ class RoomsController extends Controller
         $room = DB::table('rooms')->where('room', $id)->first();
         $room_types = DB::table('room_types')->get();
         $blocks = DB::table('blocks')->get();
+        $patients = patient::where('room', $id)->get();
 
-        return view('rooms.show', compact('room', 'room_types', 'blocks'));
+        return view('rooms.show', compact('room', 'room_types', 'blocks', 'patients'));
     }
 
     /**
@@ -80,8 +83,10 @@ class RoomsController extends Controller
 
     public function confirm(string $id){
         $room = DB::table('rooms')->where('room', $id)->first();
+        $patients = patient::where('room', $id)->get();
 
-        return view('rooms.confirm', compact('room'));
+
+        return view('rooms.confirm', compact('room', 'patients'));
 
     }
 

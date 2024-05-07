@@ -5,12 +5,21 @@
     <ul>
         <li>{{ $room->name }}</li>
         <li>{{ $room->descript }}</li>
+        <li>{{ $room->capacity }}</li>
         <li>{{ $room->block }}</li>
         <li>{{ $room->floor }}</li>
         @php $txt = $room->occupied ? "ocupado" : "livre"; @endphp
         <li>{{ $txt }}</li>
     </ul>
-
+    <h2>pacientes na sala</h2>
+    @if ($patients->count() == 0)
+        <p>nenhum paciente na sala</p>
+    @else
+        @foreach ($patients as $patient)
+            <li>{{ $patient->name }}</li>
+        @endforeach
+    @endif
+    <h1>comfirme se a sala esta cheia </h1>
     <form action="{{ route('rooms.update', ['room' => $room->room]) }}" method="post">
         @csrf
         <input type="hidden" name="_method" value="PUT">

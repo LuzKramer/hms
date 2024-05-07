@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Diagnostic;
 use App\Models\patient;
+use App\Models\room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -66,7 +68,7 @@ class PatientsController extends Controller
 
             }
 
-        $patient = new Patient([
+        $patient = new patient([
             'name' => $request->name,
             'sex' => $request->sex,
             'born' => $request->born,
@@ -121,9 +123,15 @@ class PatientsController extends Controller
             $imc = null; // Set to null if height or weight is 0
         }
 
+        $diagnostics = Diagnostic::where('patient', $id)->orderBy('date')->get();
+
+        $room = room::where('room', $patient->room)->first();
 
 
-        return view('patients.show', compact('patient', 'imc'));
+
+
+
+       return view('patients.show', compact('patient', 'imc', 'diagnostics', 'room'));
     }
 
     /**
@@ -133,7 +141,8 @@ class PatientsController extends Controller
     {
         $patient = DB::table('patients')->where('patient', $id)->first();
         $bloods = DB::table('bloods')->get();
-        return view('patients.edit', compact('patient', 'bloods'));
+        $rooms = room::get()->where('occupied', false);
+        return view('patients.edit', compact('patient', 'bloods', 'rooms'));
     }
 
     /**
@@ -141,7 +150,8 @@ class PatientsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $updated = DB::table('patients')->where('patient', $id)->update($request->except(['_token', '_method']));
+        $updated = patient::where('patient', $id)->update($request->except(['_token', '_method']));
+
 
         if ($updated) {
             return redirect(route('patients.show', $id))->with('message', 'Atualizado com sucesso!');

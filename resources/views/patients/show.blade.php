@@ -9,6 +9,14 @@
     <h1>informações do paciente </h1>
     <h3>voltar ao pacientes</h3> <a href="{{ route('patients.index') }}">clique aqui</a>
 
+    <h2>sala do paciente</h2>
+    @if ($room)
+        <p>{{ $room->name }}  <a href="{{ route('rooms.show', ['room' => $room->room]) }}">mais infornaçoes</a></p>
+    @else
+        <p>o paciente na tem sala !</p>
+    @endif
+
+
     <ul>
         <li>{{ $patient->img }}</li>
         <li>{{ $patient->name }}</li>
@@ -33,10 +41,26 @@
         <li>{{ $patient->heart_rate }}</li>
         <p>{{ $patient->ai_resp }}</p>
 
-
-
-
     </ul>
+
+    <h2>Diagnosticos do paciente</h2>
+
+    @if (count($diagnostics) > 0)
+        @foreach ($diagnostics as $diagnostic)
+            <div border="1px solid black">
+                <ul>
+                    <li>{{ $diagnostic->date }}</li>
+                    <li>{{ $diagnostic->descript }}</li>
+                    <li>{{ $diagnostic->desiase }}</li>
+                </ul>
+            </div>
+        @endforeach
+    @else
+        <p>nenhum diagnostico encontrado</p>
+    @endif
+
+
     <button><a href="{{ route('patients.edit', ['patient' => $patient->patient]) }}">editar</a></button>
-    <button><a href="{{route('diagnostic.create', ['patient' => $patient->patient])}}">fazer um diagnostico</a></button>
+    <button><a href="{{ route('diagnostic.create', ['patient' => $patient->patient]) }}">fazer um diagnostico</a></button>
+
 @endsection

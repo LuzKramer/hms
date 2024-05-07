@@ -56,6 +56,7 @@ CREATE TABLE rooms (
     occupied BOOLEAN,
     block INT,
     floor INT,
+    capacity INT,
     descript TEXT,
     FOREIGN KEY (room_type) REFERENCES room_types(room_type),
     FOREIGN KEY (block) REFERENCES blocks(block)
@@ -88,6 +89,7 @@ CREATE TABLE patients (
     born DATE,
     monitoring VARCHAR(255),
     urgency INT,
+    room INT,
     name VARCHAR(255),
     cpf VARCHAR(14) UNIQUE,
     codsus INT UNIQUE,
@@ -107,6 +109,7 @@ CREATE TABLE patients (
     medical_history TEXT,
     observations TEXT,
     ai_resp TEXT,
+    FOREIGN KEY (room) REFERENCES rooms(room),
     FOREIGN KEY (blood) REFERENCES bloods(blood)
 );
 
