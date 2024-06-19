@@ -1,56 +1,56 @@
 CREATE DATABASE hms;
 
 CREATE TABLE bloods (
-    blood SERIAL PRIMARY KEY,
+    blood INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255)
 );
 
 CREATE TABLE diseases (
-    disease SERIAL PRIMARY KEY,
+    disease INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     symptoms TEXT
 );
 
 CREATE TABLE product_cats (
-    product_cat SERIAL PRIMARY KEY,
+    product_cat INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255)
 );
 
 CREATE TABLE companies (
-    company SERIAL PRIMARY KEY,
+    company INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255)
 );
 
 CREATE TABLE room_types (
-    room_type SERIAL PRIMARY KEY,
+    room_type INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255)
 );
 
 CREATE TABLE blocks (
-    block SERIAL PRIMARY KEY,
+    block INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     map VARCHAR(255)
 );
 
 CREATE TABLE actions (
-    action SERIAL PRIMARY KEY,
+    action INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255)
 );
 
 CREATE TABLE jobs (
-    job SERIAL PRIMARY KEY,
+    job INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     descript TEXT
 );
 
 CREATE TABLE specializations (
-    specialization SERIAL PRIMARY KEY,
+    specialization INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     descript TEXT
 );
 
 CREATE TABLE rooms (
-    room SERIAL PRIMARY KEY,
+    room INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     room_type INT,
     occupied BOOLEAN,
@@ -61,30 +61,8 @@ CREATE TABLE rooms (
     FOREIGN KEY (block) REFERENCES blocks(block)
 );
 
-<<<<<<< HEAD
-CREATE TABLE workers (
-    worker SERIAL PRIMARY KEY,
-    job INT,
-    specialization INT,
-    salary BOOLEAN,
-    descript TEXT,
-    level INT,
-    name VARCHAR(255),
-    cpf VARCHAR(14) UNIQUE,
-    fone VARCHAR(15),
-    email VARCHAR(255),
-    img VARCHAR(255),
-    blood INT,
-    FOREIGN KEY (blood) REFERENCES bloods(blood),
-=======
-
-
-
-
-
-
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
     email VARCHAR(255) UNIQUE,
     password VARCHAR(255),
@@ -100,38 +78,19 @@ CREATE TABLE users (
     cpf VARCHAR(11) UNIQUE,
     fone INT,
     img VARCHAR(255),
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
     FOREIGN KEY (job) REFERENCES jobs(job),
     FOREIGN KEY (specialization) REFERENCES specializations(specialization)
 );
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 CREATE TABLE patients (
-    patient SERIAL PRIMARY KEY,
+    patient INT AUTO_INCREMENT PRIMARY KEY,
     born DATE,
     allergies TEXT,
     monitoring VARCHAR(255),
     prediseases TEXT,
     urgency INT,
     name VARCHAR(255),
-    cpf VARCHAR(14) UNIQUE,
+    cpf VARCHAR(11) UNIQUE,
     codsus INT UNIQUE,
     fone VARCHAR(15),
     email VARCHAR(255),
@@ -141,35 +100,31 @@ CREATE TABLE patients (
 );
 
 CREATE TABLE products (
-    product SERIAL PRIMARY KEY,
+    product INT AUTO_INCREMENT PRIMARY KEY,
     product_cat INT,
     quantity INT,
-    sellprice BOOLEAN,
-    price BOOLEAN,
+    sellprice INT,
+    price INT,
     name VARCHAR(255),
     descript TEXT,
     exp_date DATE,
     company INT,
-    generic BOOLEAN,
+    generic INT,
     FOREIGN KEY (product_cat) REFERENCES product_cats(product_cat),
     FOREIGN KEY (company) REFERENCES companies(company)
 );
 
 CREATE TABLE shifts (
-    shift SERIAL PRIMARY KEY,
+    shift INT AUTO_INCREMENT PRIMARY KEY,
     date DATE,
     hour TIME,
     worker INT,
     descript TEXT,
-<<<<<<< HEAD
-    FOREIGN KEY (worker) REFERENCES workers(worker)
-=======
     FOREIGN KEY (worker) REFERENCES users(id)
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 );
 
 CREATE TABLE medications (
-    medication SERIAL PRIMARY KEY,
+    medication INT AUTO_INCREMENT PRIMARY KEY,
     patient INT,
     product INT,
     worker INT,
@@ -178,54 +133,44 @@ CREATE TABLE medications (
     hour TIME,
     FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (product) REFERENCES products(product),
-<<<<<<< HEAD
-    FOREIGN KEY (worker) REFERENCES workers(worker)
-=======
     FOREIGN KEY (worker) REFERENCES users(id)
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 );
 
 CREATE TABLE diagnostics (
-    diagnostic SERIAL PRIMARY KEY,
+    diagnostic INT AUTO_INCREMENT PRIMARY KEY,
     patient INT,
     descript TEXT,
     disease INT,
+    user_id INT
     date DATE,
+    FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (disease) REFERENCES diseases(disease)
 );
 
 CREATE TABLE cares (
-    care SERIAL PRIMARY KEY,
+    care INT AUTO_INCREMENT PRIMARY KEY,
     action INT,
     patient INT,
     worker INT,
     hour TIME,
-    ok BOOLEAN,
+    ok INT,
     FOREIGN KEY (action) REFERENCES actions(action),
     FOREIGN KEY (patient) REFERENCES patients(patient),
-<<<<<<< HEAD
-    FOREIGN KEY (worker) REFERENCES workers(worker)
-=======
     FOREIGN KEY (worker) REFERENCES users(id)
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 );
 
 CREATE TABLE requests(
-    request SERIAL PRIMARY KEY,
+    request INT AUTO_INCREMENT PRIMARY KEY,
     date DATE,
     hour TIME,
     worker INT,
     done BOOLEAN,
-<<<<<<< HEAD
-    FOREIGN KEY (worker) REFERENCES workers(worker)
-=======
     FOREIGN KEY (worker) REFERENCES users(id)
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 );
 
 CREATE TABLE products_requests (
-    product_request SERIAL PRIMARY KEY,
+    product_request INT AUTO_INCREMENT PRIMARY KEY,
     product INT,
     request INT,
     quantity INT,
@@ -234,7 +179,7 @@ CREATE TABLE products_requests (
 );
 
 CREATE TABLE consults (
-    consult SERIAL PRIMARY KEY,
+    consult INT AUTO_INCREMENT PRIMARY KEY,
     patient INT,
     worker INT,
     date DATE,
@@ -242,38 +187,24 @@ CREATE TABLE consults (
     room INT,
     ok BOOLEAN,
     FOREIGN KEY (patient) REFERENCES patients(patient),
-<<<<<<< HEAD
-    FOREIGN KEY (worker) REFERENCES workers(worker),
-=======
     FOREIGN KEY (worker) REFERENCES users(id),
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
     FOREIGN KEY (room) REFERENCES rooms(room)
 );
 
 CREATE TABLE surgeries (
-    surgery SERIAL PRIMARY KEY,
-<<<<<<< HEAD
-    worker1 INT,
-    worker2 INT,
-=======
+    surgery INT AUTO_INCREMENT PRIMARY KEY,
     worker INT,
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
     patient INT,
     room INT,
     hour TIME,
     date DATE,
     FOREIGN KEY (patient) REFERENCES patients(patient),
-<<<<<<< HEAD
-    FOREIGN KEY (worker1) REFERENCES workers(worker),
-    FOREIGN KEY (worker2) REFERENCES workers(worker),
-=======
     FOREIGN KEY (worker) REFERENCES users(id),
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
     FOREIGN KEY (room) REFERENCES rooms(room)
 );
 
 CREATE TABLE visitors (
-    visitor SERIAL PRIMARY KEY,
+    visitor INT AUTO_INCREMENT PRIMARY KEY,
     person_name VARCHAR(255),
     patient INT,
     date DATE,
@@ -285,7 +216,7 @@ CREATE TABLE visitors (
 );
 
 CREATE TABLE used_rooms (
-    used_room SERIAL PRIMARY KEY,
+    used_room INT AUTO_INCREMENT PRIMARY KEY,
     room INT,
     patient INT,
     hour TIME,
@@ -295,23 +226,22 @@ CREATE TABLE used_rooms (
 );
 
 CREATE TABLE calls (
-    call SERIAL PRIMARY KEY,
+    call INT AUTO_INCREMENT PRIMARY KEY,
     patient INT,
     date DATE,
     FOREIGN KEY (patient) REFERENCES patients(patient)
 );
 
-
 CREATE TABLE incomes(
-    income SERIAL PRIMARY KEY,
+    income INT AUTO_INCREMENT PRIMARY KEY,
     descript TEXT,
-    value BOOLEAN,
+    value INT,
     date DATE
 );
 
 CREATE TABLE expenses(
-    expense SERIAL PRIMARY KEY,
+    expense INT AUTO_INCREMENT PRIMARY KEY,
     descript TEXT,
-    value BOOLEAN,
+    value INT,
     date DATE
 );

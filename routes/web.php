@@ -12,6 +12,9 @@ use App\Http\Controllers\site\PharmaController;
 use App\Http\Controllers\site\CatproductController;
 use App\Http\Controllers\site\CompaniesController;
 use App\Http\Controllers\site\ProductController;
+use App\Http\Controllers\DiagnosticController;
+use App\Http\Controllers\MedicController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +45,10 @@ require __DIR__ . '/auth.php';
 Route::namespace(value: 'site')->group(function () {
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 882e1e23d59df844acfb450d7538dbad01d49ffc
 
 
 
@@ -113,4 +119,20 @@ Route::namespace(value: 'site')->group(function () {
     Route::get('/farmacia/companias/editar/{company}', [CompaniesController::class, 'edit'])->name('companies.edit');
     Route::put('/farmacia/companias/atualizar/{company}', [CompaniesController::class, 'update'])->name('companies.update');
     Route::delete('/farmacia/companias/excluir/{company}', [CompaniesController::class, 'destroy'])->name('companies.destroy');
+
+
+
+
+});
+
+
+Route::middleware('medic')->group(function () {
+
+    Route::get("/medico/painel", [MedicController::class, "board"])->name('medic.board');
+
+});
+
+Route::middleware('nurse')->group(function () {
+   Route::get("/diagnostico/adicionar", [DiagnosticController::class, "create"])->name('diagnostic.create   ');
+   Route::post("/diagnostico/salvar", [DiagnosticController::class, "store"])->name('diagnostic.store');
 });

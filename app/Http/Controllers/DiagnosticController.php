@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Diagnostic;
+use App\Models\Disease;
+use App\Models\patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class DiagnosticController extends Controller
 {
@@ -21,8 +24,10 @@ class DiagnosticController extends Controller
      */
     public function create()
     {
-        $userId = Session::get('user_id');
+         $patients = patient::all();
+         $diseases = Disease::all();
 
+        return view('diagnostics.add', compact('patients', 'diseases'));
     }
 
     /**
@@ -30,8 +35,20 @@ class DiagnosticController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userId = Auth::user()->level;
+        $date = now()->format('Y-m-d');
+        $diagnostic = new Diagnostic([
+            'patient' => $request->patient,
+            'disease' => $request->disease,
+            'descript' => $request->descript,
+            'user_id' => $userId,
+            'date' => $date]);
+
+        $diagnostic->save(); // Save the diagnostic instance
+
+        return redirect()->back()->with('message', 'Diagnostico adicionado com sucesso!');
     }
+
 
     /**
      * Display the specified resource.
