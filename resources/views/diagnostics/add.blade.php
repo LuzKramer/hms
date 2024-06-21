@@ -15,12 +15,11 @@
     <label for="descript">Diagnostico</label>
     <br><br>
     <label for="patient">Paciente</label>
-    <select name="patient" >
-        @foreach ($patients as $patient )
-            <option value="{{$patient->patient}}">{{$patient->name}}</option>
+    <p>{{$patient->name}}</p>
 
-        @endforeach
-    </select>
+    <input type="hidden" name="patient" value="{{$patient->patient}}">
+
+    <br>
     <label for="descript">descrição</label>
     <input type="text" name="descript" placeholder="descrição do diagnostico">
 

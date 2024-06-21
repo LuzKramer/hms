@@ -7,10 +7,10 @@
         <ul>
             @foreach ($patients as $patient)
                 <li>
-                    {{ $patient->name }}, {{ $patient->cpf }}, {{ $patient->img }}
+                    {{ $patient->img}}, {{ $patient->name }}, {{ $patient->cpf }}
                     <button><a href="{{ route('patients.show', ['patient' => $patient->patient]) }}">mais
                             informações</a></button>
-                    <button><a href="{{ route('patients.edit', ['patient' => $patient->patient]) }}">editar</a></button>
+
                 </li>
             @endforeach
 

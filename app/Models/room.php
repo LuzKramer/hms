@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class room extends Model
 {
-    protected $table = 'room';
+    protected $table = 'rooms';
     use HasFactory;
 
     protected $fillable = [
@@ -15,6 +15,7 @@ class room extends Model
     'name',
     'room_type',
     'occupied',
+    'capacity',
     'block',
     'floor',
     'descript',

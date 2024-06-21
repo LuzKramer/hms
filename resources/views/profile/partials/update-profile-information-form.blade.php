@@ -1,11 +1,7 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-<<<<<<< HEAD
-            {{ __('Profile Information') }}
-=======
             {{ __('informações do perfil') }}
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
@@ -26,8 +22,6 @@
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
-<<<<<<< HEAD
-=======
         <div>
             <x-input-label for="cpf" :value="__('CPF')" />
             <x-text-input id="cpf" name="cpf" type="text"  size="14" class="mt-1 block w-full" :value="old('cpf', $user->cpf)" required autofocus autocomplete="cpf" />
@@ -38,7 +32,6 @@
             <x-text-input id="fone" name="fone" type="text"  size="14" class="mt-1 block w-full" :value="old('fone', $user->fone)" required autofocus autocomplete="fone" />
             <x-input-error class="mt-2" :messages="$errors->get('fone')" />
         </div>
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
@@ -64,10 +57,6 @@
             @endif
         </div>
 
-<<<<<<< HEAD
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-=======
         <div>
             <x-input-label for="job" :value="__('Profissão')" />
             <select name="job" id="job">
@@ -93,7 +82,6 @@
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Salvar') }}</x-primary-button>
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 
             @if (session('status') === 'profile-updated')
                 <p
@@ -102,11 +90,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600"
-<<<<<<< HEAD
-                >{{ __('Saved.') }}</p>
-=======
                 >{{ __('Salvo.') }}</p>
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
             @endif
         </div>
     </form>

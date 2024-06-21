@@ -8,15 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class patient extends Model
 {
     protected $table = 'patients';
+    protected $primaryKey = 'patient';
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         'patient',
+        'sex',
         'born',
-        'allergies',
         'monitoring',
-        'prediseases',
         'urgency',
+        'room',
         'name',
         'cpf',
         'codsus',
@@ -24,6 +26,16 @@ class patient extends Model
         'email',
         'img',
         'blood',
+        'symptoms',
+        'systolic_pressure',
+        'diastolic_pressure',
+        'temperature',
+        'weight',
+        'height',
+        'heart_rate',
+        'medical_history',
+        'observations',
+        'ai_resp',
 
     ];
 }

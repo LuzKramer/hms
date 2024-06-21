@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\site;
 
 use App\Models\Diagnostic;
 use App\Models\Disease;
 use App\Models\patient;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DiagnosticController extends Controller
 {
@@ -22,12 +22,14 @@ class DiagnosticController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id)
     {
-         $patients = patient::all();
-         $diseases = Disease::all();
 
-        return view('diagnostics.add', compact('patients', 'diseases'));
+         $diseases = Disease::all();
+         $patient = patient::find($id);
+
+
+        return view('diagnostics.add', compact('patient', 'diseases'));
     }
 
     /**

@@ -56,6 +56,7 @@ CREATE TABLE rooms (
     occupied BOOLEAN,
     block INT,
     floor INT,
+    capacity INT,
     descript TEXT,
     FOREIGN KEY (room_type) REFERENCES room_types(room_type),
     FOREIGN KEY (block) REFERENCES blocks(block)
@@ -83,19 +84,32 @@ CREATE TABLE users (
 );
 
 CREATE TABLE patients (
-    patient INT AUTO_INCREMENT PRIMARY KEY,
+    patient  INT AUTO_INCREMENT PRIMARY KEY,
+    sex VARCHAR(1),
     born DATE,
-    allergies TEXT,
     monitoring VARCHAR(255),
-    prediseases TEXT,
     urgency INT,
+    room INT,
     name VARCHAR(255),
-    cpf VARCHAR(11) UNIQUE,
+    cpf VARCHAR(14) UNIQUE,
     codsus INT UNIQUE,
+    needcare BOOLEAN,
     fone VARCHAR(15),
     email VARCHAR(255),
     img VARCHAR(255),
     blood INT,
+    datetime TIMESTAMP,
+    symptoms TEXT,
+    systolic_pressure INT,
+    diastolic_pressure INT,
+    temperature DECIMAL(5,2),
+    weight DECIMAL (5,2),
+    height INT,
+    heart_rate INT,
+    medical_history TEXT,
+    observations TEXT,
+    ai_resp TEXT,
+    FOREIGN KEY (room) REFERENCES rooms(room),
     FOREIGN KEY (blood) REFERENCES bloods(blood)
 );
 
@@ -141,12 +155,14 @@ CREATE TABLE diagnostics (
     patient INT,
     descript TEXT,
     disease INT,
-    user_id INT
+    user_id INT,
     date DATE,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (disease) REFERENCES diseases(disease)
 );
+
+
 
 CREATE TABLE cares (
     care INT AUTO_INCREMENT PRIMARY KEY,

@@ -12,8 +12,10 @@ use App\Http\Controllers\site\PharmaController;
 use App\Http\Controllers\site\CatproductController;
 use App\Http\Controllers\site\CompaniesController;
 use App\Http\Controllers\site\ProductController;
-use App\Http\Controllers\DiagnosticController;
-use App\Http\Controllers\MedicController;
+use App\Http\Controllers\site\DiagnosticController;
+use App\Http\Controllers\site\MedicController;
+use App\Http\Controllers\site\GeminiController;
+
 
 
 /*
@@ -45,10 +47,6 @@ require __DIR__ . '/auth.php';
 Route::namespace(value: 'site')->group(function () {
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 882e1e23d59df844acfb450d7538dbad01d49ffc
 
 
 
@@ -95,6 +93,7 @@ Route::namespace(value: 'site')->group(function () {
 
     Route::get('/pacientes', [PatientsController::class, 'index'])->name('patients.index');
     Route::get('/pacientes/adicionar', [PatientsController::class, 'create'])->name('patients.create');
+
     Route::post('/pacientes/salvar', [PatientsController::class, 'store'])->name('patients.store');
     Route::get('/pacientes/{patient}', [PatientsController::class, 'show'])->name('patients.show');
     Route::get('/pacientes/{patient}/editar', [PatientsController::class, 'edit'])->name('patients.edit');
@@ -120,19 +119,19 @@ Route::namespace(value: 'site')->group(function () {
     Route::put('/farmacia/companias/atualizar/{company}', [CompaniesController::class, 'update'])->name('companies.update');
     Route::delete('/farmacia/companias/excluir/{company}', [CompaniesController::class, 'destroy'])->name('companies.destroy');
 
+    Route::middleware('medic')->group(function () {
+
+        Route::get("/medico/painel", [MedicController::class, "board"])->name('medic.board');
+
+    });
+
+    Route::middleware('nurse')->group(function () {
+       Route::get("/diagnostico/adicionar/{patient}", [DiagnosticController::class, "create"])->name('diagnostic.create');
+       Route::post("/diagnostico/salvar", [DiagnosticController::class, "store"])->name('diagnostic.store');
+    });
+
 
 
 
 });
 
-
-Route::middleware('medic')->group(function () {
-
-    Route::get("/medico/painel", [MedicController::class, "board"])->name('medic.board');
-
-});
-
-Route::middleware('nurse')->group(function () {
-   Route::get("/diagnostico/adicionar", [DiagnosticController::class, "create"])->name('diagnostic.create   ');
-   Route::post("/diagnostico/salvar", [DiagnosticController::class, "store"])->name('diagnostic.store');
-});

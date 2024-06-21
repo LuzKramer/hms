@@ -53,6 +53,7 @@ CREATE TABLE rooms (
     room SERIAL PRIMARY KEY,
     name VARCHAR(255),
     room_type INT,
+    capacity INT,
     occupied BOOLEAN,
     block INT,
     floor INT,
@@ -125,18 +126,31 @@ CREATE TABLE users (
 >>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
 CREATE TABLE patients (
     patient SERIAL PRIMARY KEY,
+    sex VARCHAR(1),
     born DATE,
-    allergies TEXT,
     monitoring VARCHAR(255),
-    prediseases TEXT,
     urgency INT,
+    room INT,
     name VARCHAR(255),
     cpf VARCHAR(14) UNIQUE,
     codsus INT UNIQUE,
+    needcare BOOLEAN,
     fone VARCHAR(15),
     email VARCHAR(255),
     img VARCHAR(255),
     blood INT,
+    datetime TIMESTAMP,
+    symptoms TEXT,
+    systolic_pressure INT,
+    diastolic_pressure INT,
+    temperature DECIMAL(5,2),
+    weight DECIMAL (5,2),
+    height INT,
+    heart_rate INT,
+    medical_history TEXT,
+    observations TEXT,
+    ai_resp TEXT,
+    FOREIGN KEY (room) REFERENCES rooms(room),
     FOREIGN KEY (blood) REFERENCES bloods(blood)
 );
 
@@ -191,11 +205,13 @@ CREATE TABLE diagnostics (
     descript TEXT,
     disease INT,
     date DATE,
-    user_id INT
+    user_id INT,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (disease) REFERENCES diseases(disease)
 );
+
+
 
 CREATE TABLE cares (
     care SERIAL PRIMARY KEY,
