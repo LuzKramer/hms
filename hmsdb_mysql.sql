@@ -84,7 +84,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE patients (
-    patient  INT AUTO_INCREMENT PRIMARY KEY,
+    patient INT AUTO_INCREMENT PRIMARY KEY,
     sex VARCHAR(1),
     born DATE,
     monitoring VARCHAR(255),
@@ -94,21 +94,24 @@ CREATE TABLE patients (
     cpf VARCHAR(14) UNIQUE,
     codsus INT UNIQUE,
     needcare BOOLEAN,
+    discharge BOOLEAN,
     fone VARCHAR(15),
     email VARCHAR(255),
     img VARCHAR(255),
     blood INT,
     datetime TIMESTAMP,
     symptoms TEXT,
+    medic INT,
     systolic_pressure INT,
     diastolic_pressure INT,
-    temperature DECIMAL(5,2),
-    weight DECIMAL (5,2),
+    temperature DECIMAL(5, 2),
+    weight DECIMAL (5, 2),
     height INT,
     heart_rate INT,
     medical_history TEXT,
     observations TEXT,
     ai_resp TEXT,
+    FOREIGN KEY (medic) REFERENCES users(id),
     FOREIGN KEY (room) REFERENCES rooms(room),
     FOREIGN KEY (blood) REFERENCES bloods(blood)
 );
@@ -137,16 +140,42 @@ CREATE TABLE shifts (
     FOREIGN KEY (worker) REFERENCES users(id)
 );
 
+CREATE TABLE exams (
+    id AUTO_INCREMENT PRIMARY KEY,
+    patient INT,
+    descript TEXT,
+    mrequest INT,
+    mresponsable INT,
+    datetime TIMESTAMP,
+    FOREIGN KEY (mrequest) REFERENCES users(id),
+    FOREIGN KEY (mresponsable) REFERENCES users(id),
+    FOREIGN KEY (patient) REFERENCES patients(patient)
+);
+
+CREATE TABLE examsimgs (
+    id AUTO_INCREMENT PRIMARY KEY,
+    exam INT,
+    img VARCHAR(255),
+    FOREIGN KEY (exam) REFERENCES exams(id)
+);
+
 CREATE TABLE medications (
     medication INT AUTO_INCREMENT PRIMARY KEY,
     patient INT,
-    product INT,
     worker INT,
     descript TEXT,
-    date DATE,
-    hour TIME,
+    datetime TIMESTAMP,
     FOREIGN KEY (patient) REFERENCES patients(patient),
-    FOREIGN KEY (product) REFERENCES products(product),
+    FOREIGN KEY (worker) REFERENCES users(id)
+);
+
+CREATE TABLE prescriptions (
+    medication INT AUTO_INCREMENT PRIMARY KEY,
+    patient INT,
+    worker INT,
+    descript TEXT,
+    datetime TIMESTAMP,
+    FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (worker) REFERENCES users(id)
 );
 
@@ -161,8 +190,6 @@ CREATE TABLE diagnostics (
     FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (disease) REFERENCES diseases(disease)
 );
-
-
 
 CREATE TABLE cares (
     care INT AUTO_INCREMENT PRIMARY KEY,

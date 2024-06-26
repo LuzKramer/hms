@@ -62,12 +62,6 @@ CREATE TABLE rooms (
     FOREIGN KEY (block) REFERENCES blocks(block)
 );
 
-
-
-
-
-
-
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
@@ -89,21 +83,6 @@ CREATE TABLE users (
     FOREIGN KEY (specialization) REFERENCES specializations(specialization)
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 CREATE TABLE patients (
     patient SERIAL PRIMARY KEY,
     sex VARCHAR(1),
@@ -123,13 +102,16 @@ CREATE TABLE patients (
     symptoms TEXT,
     systolic_pressure INT,
     diastolic_pressure INT,
-    temperature DECIMAL(5,2),
-    weight DECIMAL (5,2),
+    temperature DECIMAL(5, 2),
+    weight DECIMAL (5, 2),
     height INT,
     heart_rate INT,
     medical_history TEXT,
     observations TEXT,
+    discharge BOOLEAN,
+    medic INT,
     ai_resp TEXT,
+    FOREIGN KEY (medic) REFERENCES users(id),
     FOREIGN KEY (room) REFERENCES rooms(room),
     FOREIGN KEY (blood) REFERENCES bloods(blood)
 );
@@ -158,16 +140,42 @@ CREATE TABLE shifts (
     FOREIGN KEY (worker) REFERENCES users(id)
 );
 
+CREATE TABLE exams (
+    id SERIAL PRIMARY KEY,
+    patient INT,
+    descript TEXT,
+    mrequest INT,
+    mresponsable INT,
+    datetime TIMESTAMP,
+    FOREIGN KEY (mrequest) REFERENCES users(id),
+    FOREIGN KEY (mresponsable) REFERENCES users(id),
+    FOREIGN KEY (patient) REFERENCES patients(patient)
+);
+
+CREATE TABLE examsimgs (
+    id SERIAL PRIMARY KEY,
+    exam INT,
+    img VARCHAR(255),
+    FOREIGN KEY (exam) REFERENCES exams(id)
+);
+
 CREATE TABLE medications (
     medication SERIAL PRIMARY KEY,
     patient INT,
-    product INT,
     worker INT,
     descript TEXT,
-    date DATE,
-    hour TIME,
+    datetime TIMESTAMP,
     FOREIGN KEY (patient) REFERENCES patients(patient),
-    FOREIGN KEY (product) REFERENCES products(product),
+    FOREIGN KEY (worker) REFERENCES users(id)
+);
+
+CREATE TABLE prescriptions (
+    medication SERIAL PRIMARY KEY,
+    patient INT,
+    worker INT,
+    descript TEXT,
+    datetime TIMESTAMP,
+    FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (worker) REFERENCES users(id)
 );
 
@@ -182,8 +190,6 @@ CREATE TABLE diagnostics (
     FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (disease) REFERENCES diseases(disease)
 );
-
-
 
 CREATE TABLE cares (
     care SERIAL PRIMARY KEY,
@@ -269,7 +275,6 @@ CREATE TABLE calls (
     FOREIGN KEY (patient) REFERENCES patients(patient)
 );
 
-
 CREATE TABLE incomes(
     income SERIAL PRIMARY KEY,
     descript TEXT,
@@ -283,4 +288,3 @@ CREATE TABLE expenses(
     value INT,
     date DATE
 );
-

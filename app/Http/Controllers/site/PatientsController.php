@@ -5,6 +5,8 @@ namespace App\Http\Controllers\site;
 use App\Http\Controllers\Controller;
 use App\Models\Diagnostic;
 use App\Models\patient;
+use App\Models\Prescription;
+use App\Models\Medication;
 use App\Models\room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +27,20 @@ class PatientsController extends Controller
 
         return view('patients.index', compact('patients'));
     }
+
+    public function src(Request $request)
+    {
+        $patient = $request->src;  // Corrigir para capturar o valor do input correto
+        $patients = patient::where('name', 'like', "%$patient%")->get();  // Usar uma busca flexível
+
+        if ($patients->isEmpty()) {
+            return redirect()->back()->with('message', 'Nenhum paciente encontrado!');
+        } else {
+
+            return view('patients.index', compact( 'patients'));
+        }
+    }
+
 
 
 
@@ -60,13 +76,12 @@ class PatientsController extends Controller
             "Observações: " . $request->observations . ",\n" .
             "Data: " . $date;
 
-            if ($geminiService->hasConnection()) {
-                // Call the GeminiService function for diagnosis
-                $result = $geminiService->diagnostico($Info);
-            } else {
-                $result = "Não foi possivel fazer o diagnostico com a IA !";
-
-            }
+        if ($geminiService->hasConnection()) {
+            // Call the GeminiService function for diagnosis
+            $result = $geminiService->diagnostico($Info);
+        } else {
+            $result = "Não foi possivel fazer o diagnostico com a IA !";
+        }
 
         $patient = new patient([
             'name' => $request->name,
@@ -124,6 +139,16 @@ class PatientsController extends Controller
         }
 
         $diagnostics = Diagnostic::where('patient', $id)->orderBy('date')->get();
+        $prescriptions = Prescription::where('patient', $id)
+            ->join('users', 'users.id', '=', 'prescriptions.worker')
+            ->orderByDesc('datetime')
+            ->get();
+
+        $medications = Medication::where('patient', $id)
+        ->join('users', 'users.id', '=', 'medications.worker')
+        ->orderByDesc('datetime')
+        ->get();
+
 
         $room = room::where('room', $patient->room)->first();
 
@@ -131,7 +156,7 @@ class PatientsController extends Controller
 
 
 
-       return view('patients.show', compact('patient', 'imc', 'diagnostics', 'room'));
+        return view('patients.show', compact('patient', 'imc', 'diagnostics', 'room', 'prescriptions', 'medications'));
     }
 
     /**
