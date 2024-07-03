@@ -9,7 +9,7 @@
     @endif
 </div>
 
-<form action="{{route('diagnostic.store')}}" method="post">
+<form action="{{route('diagnostic.store', ['patient' => $patient->patient])}}" method="post">
     @csrf
 
     <label for="descript">Diagnostico</label>
@@ -17,7 +17,7 @@
     <label for="patient">Paciente</label>
     <p>{{$patient->name}}</p>
 
-    <input type="hidden" name="patient" value="{{$patient->patient}}">
+
 
     <br>
     <label for="descript">descrição</label>

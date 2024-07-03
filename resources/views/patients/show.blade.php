@@ -11,7 +11,7 @@
 
     <h2>sala do paciente</h2>
     @if ($room)
-        <p>{{ $room->name }}  <a href="{{ route('rooms.show', ['room' => $room->room]) }}">mais infornaçoes</a></p>
+        <p>{{ $room->name }} <a href="{{ route('rooms.show', ['room' => $room->room]) }}">mais infornaçoes</a></p>
     @else
         <p>o paciente na tem sala !</p>
     @endif
@@ -43,6 +43,11 @@
 
     </ul>
 
+    @if (Auth::check() && in_array(Auth::user()->level, [4, 3, 1]))
+        <button><a href="{{ route('patients.edit', ['patient' => $patient->patient]) }}">editar f </a></button>
+    @endif
+
+
     <h2>Diagnosticos do paciente</h2>
 
     @if (count($diagnostics) > 0)
@@ -59,8 +64,47 @@
         <p>nenhum diagnostico encontrado</p>
     @endif
 
+    <h2>Prescrições do paciente</h2>
 
-    <button><a href="{{ route('patients.edit', ['patient' => $patient->patient]) }}">editar</a></button>
-    <button><a href="{{ route('diagnostic.create', ['patient' => $patient->patient]) }}">fazer um diagnostico</a></button>
+    @if (count($prescriptions) > 0)
+        @foreach ($prescriptions as $prescription)
+            <div border="1px solid black">
+                <ul>
+                    <li> data da prescrição : {{ $prescription->datetime }}</li>
+                    <li> medico responsavel :{{ $prescription->name }}</li>
+                </ul>
+                <button
+                    onclick="window.location.href='{{ route('prescription.show', ['prescription' => $prescription->medication]) }}'">olhar
+                    precrição </button>
+            </div>
+        @endforeach
+    @else
+        <p>nenhuma prescricao encontrada</p>
+    @endif
 
+    @if (count($medications) > 0)
+    @foreach ($medications as $medication)
+        <div style="border: 1px solid black; padding: 10px; margin-bottom: 10px;">
+            <ul>
+                <li>Data da prescrição: {{ $medication->datetime }}</li>
+                <li>Médico responsável: {{ $medication->name }}</li>
+                <li>Medicação: {{ $medication->descript }}</li>
+            </ul>
+        </div>
+    @endforeach
+@else
+    <p>Nenhuma medicação encontrada</p>
+@endif
+
+
+
+
+    @if (Auth::check() && in_array(Auth::user()->level, [4, 3, 1]))
+        <button><a href="{{ route('diagnostic.create', ['patient' => $patient->patient]) }}">fazer um
+                diagnostico</a></button>
+        <button onclick="window.location.href='{{ route('prescription.create', ['patient' => $patient->patient]) }}'">fazer
+            uma prescricao</button>
+            <button onclick="window.location.href='{{ route('medication.create', ['patient' => $patient->patient]) }}'">fazer
+                uma medicação</button>
+    @endif
 @endsection
