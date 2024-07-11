@@ -52,37 +52,46 @@ class MedicController extends Controller
      */
     public function presstore(Request $request)
     {
-
+        // Validate the request data
         $request->validate([
             'descript' => 'required',
             'patient' => 'required',
         ]);
 
+
+        // Retrieve the authenticated user's ID and current date/time
         $userId = Auth::user()->level;
         $date = now();
 
+        // Create a new Prescription instance with the provided data
         $prescription = new Prescription([
-            'patient' => $request->patient,
             'descript' => $request->descript,
+            'patient' => $request->patient,
             'worker' => $userId,
             'datetime' => $date
         ]);
+
+        // Save the prescription to the database
         $prescription->save();
-        return redirect()->to("/pacientes/$request->patient")->with('message', 'Prescrição adicionada com sucesso!');
+
+        // Redirect back with a success message
+        return redirect()->back()->with('message', 'Prescrição adicionada com sucesso!');
     }
+
 
     /**
      * Display the specified resource.
      */
     public function presshow(string $id)
     {
-        $prescription = Prescription::find($id)
-            ->join("users", "users.id", "=", "medications.worker")
-            ->where("medications.medication", $id)
-            ->select("medications.*", "users.name")
+        $prescription = Prescription::where('medication', $id)
+            ->join('users', 'users.id', '=', 'prescriptions.worker')
+            ->select('prescriptions.*', 'users.name as name')
             ->first();
 
+
         $patient = patient::find($prescription->patient);
+
 
 
         return view('medications.show', compact('prescription', 'patient'));
@@ -113,6 +122,17 @@ class MedicController extends Controller
         } else {
             return redirect()->back()->with('error', 'Falha ao atualizar a prescrição.');
         }
+    }
+
+    public function presconfirm(Request $request, string  $id)
+    {
+
+        $request->validate([
+            'concluded' => 'required',
+        ]);
+
+        $updated = Prescription::where('medication', $id)->update(['concluded' => $request->concluded]);
+        return redirect()->back()->with('message', 'Prescrição concluída com sucesso!');
     }
 
 

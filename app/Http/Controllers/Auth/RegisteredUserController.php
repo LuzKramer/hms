@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\job;
+use App\Models\Job;
 use App\Models\specialization;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -22,7 +22,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $jobs =  job::all();
+        $jobs =  Job::all();
         $specializs =  specialization::all();
 
         return view('auth.register', [

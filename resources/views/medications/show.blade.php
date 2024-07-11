@@ -26,7 +26,7 @@
         <li>{{ $prescription->descript }}</li>
 
     </ul>
-    @if (Auth::check() && in_array(Auth::user()->level, [4, 3, 1]))
+    @if (Auth::check() && in_array(Auth::user()->level, [3, 1]))
         <button
             onclick="window.location.href='{{ route('prescription.edit', ['prescription' => $prescription->medication]) }}'">editar</button>
     @else

@@ -68,33 +68,54 @@
 
     @if (count($prescriptions) > 0)
         @foreach ($prescriptions as $prescription)
-            <div border="1px solid black">
+            <div style="border: 1px solid black; padding: 10px; margin-bottom: 10px;">
                 <ul>
                     <li> data da prescrição : {{ $prescription->datetime }}</li>
                     <li> medico responsavel :{{ $prescription->name }}</li>
+                    <li>Medicação: {{ $prescription->descript }}</li>
                 </ul>
                 <button
                     onclick="window.location.href='{{ route('prescription.show', ['prescription' => $prescription->medication]) }}'">olhar
                     precrição </button>
+
+                @if (Auth::check() && in_array(Auth::user()->level, [3, 1]))
+                    <button
+                        onclick="window.location.href='{{ route('prescription.edit', ['prescription' => $prescription->medication]) }}'">editar
+                        precrição </button>
+                @endif
+
+                @if ($prescription->concluded == 1)
+                <div style="background-color: green ; padding: 10px; color: white">
+                    <p>prescrição concluída</p>
+
+                </div>
+
+
+
+                @endif
+
+                @if ( $prescription->concluded == 0 &&  Auth::check() && in_array(Auth::user()->level, [3, 4, 1]))
+                    <form action="{{ route('prescription.confirm', ['prescription' => $prescription->medication]) }}" method="post">
+                        @csrf
+                        <input type="hidden" name="_method" value="PUT">
+
+
+                        <input type="hidden" name="concluded" id="concluded" value="1"
+                            {{ $prescription->occupied ? 'selected' : '' }}>
+
+
+                        <button type="submit">confirmar </button>
+                    </form>
+                @endif
+
             </div>
         @endforeach
     @else
         <p>nenhuma prescricao encontrada</p>
     @endif
 
-    @if (count($medications) > 0)
-    @foreach ($medications as $medication)
-        <div style="border: 1px solid black; padding: 10px; margin-bottom: 10px;">
-            <ul>
-                <li>Data da prescrição: {{ $medication->datetime }}</li>
-                <li>Médico responsável: {{ $medication->name }}</li>
-                <li>Medicação: {{ $medication->descript }}</li>
-            </ul>
-        </div>
-    @endforeach
-@else
-    <p>Nenhuma medicação encontrada</p>
-@endif
+
+
 
 
 
@@ -104,7 +125,7 @@
                 diagnostico</a></button>
         <button onclick="window.location.href='{{ route('prescription.create', ['patient' => $patient->patient]) }}'">fazer
             uma prescricao</button>
-            <button onclick="window.location.href='{{ route('medication.create', ['patient' => $patient->patient]) }}'">fazer
-                uma medicação</button>
+        <button onclick="window.location.href='{{ route('medication.create', ['patient' => $patient->patient]) }}'">fazer
+            uma medicação</button>
     @endif
 @endsection

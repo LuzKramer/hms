@@ -37,7 +37,7 @@ class PatientsController extends Controller
             return redirect()->back()->with('message', 'Nenhum paciente encontrado!');
         } else {
 
-            return view('patients.index', compact( 'patients'));
+            return view('patients.index', compact('patients'));
         }
     }
 
@@ -139,15 +139,19 @@ class PatientsController extends Controller
         }
 
         $diagnostics = Diagnostic::where('patient', $id)->orderBy('date')->get();
+
+
         $prescriptions = Prescription::where('patient', $id)
             ->join('users', 'users.id', '=', 'prescriptions.worker')
             ->orderByDesc('datetime')
+            ->select('prescriptions.*', 'users.name as name')
             ->get();
 
+
         $medications = Medication::where('patient', $id)
-        ->join('users', 'users.id', '=', 'medications.worker')
-        ->orderByDesc('datetime')
-        ->get();
+            ->join('users', 'users.id', '=', 'medications.worker')
+            ->orderByDesc('datetime')
+            ->get();
 
 
         $room = room::where('room', $patient->room)->first();
@@ -156,8 +160,13 @@ class PatientsController extends Controller
 
 
 
+
+
+
         return view('patients.show', compact('patient', 'imc', 'diagnostics', 'room', 'prescriptions', 'medications'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

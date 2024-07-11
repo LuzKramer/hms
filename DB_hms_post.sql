@@ -176,10 +176,11 @@ CREATE TABLE prescriptions (
     patient INT,
     worker INT,
     descript TEXT,
+    concluded BOOLEAN,
     datetime TIMESTAMP,
     FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (worker) REFERENCES users(id)
->>>>>>> 788c06477a1843536f63b58b5cd3a3ba787b8386
+
 );
 
 CREATE TABLE diagnostics (

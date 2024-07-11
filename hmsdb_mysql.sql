@@ -175,6 +175,7 @@ CREATE TABLE prescriptions (
     worker INT,
     descript TEXT,
     datetime TIMESTAMP,
+    concluded TINYINT(1),
     FOREIGN KEY (patient) REFERENCES patients(patient),
     FOREIGN KEY (worker) REFERENCES users(id)
 );

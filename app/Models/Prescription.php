@@ -11,15 +11,17 @@ class Prescription extends Model
     protected $table = 'prescriptions';
     use HasFactory;
 
-    protected $primaryKey = 'prescription';
+    protected $primaryKey = 'medication';
 
     protected $fillable = [
         'medication',
         'patient',
         'worker',
         'descript',
-        'datetime'
+        'datetime',
+        'concluded'
 
 
     ];
 }
+

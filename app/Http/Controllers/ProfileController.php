@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\job;
+use App\Models\Job;
 use App\Models\specialization;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        $jobs =  job::all();
+        $jobs =  Job::all();
         $specializs =  specialization::all();
 
         return view('profile.edit', [

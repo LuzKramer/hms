@@ -137,6 +137,8 @@ Route::namespace(value: 'site')->group(function () {
     Route::get("/medicacao/{patient}/adicionar", [MedicationController::class, "create"])->name('medication.create');
     Route::post("/medicacao/salvar", [MedicationController::class, "store"])->name('medication.store');
 
+    Route::put("/prescricao/{prescription}/concluir", [MedicController::class, "presconfirm"])->name('prescription.confirm');
+
 
     Route::middleware('nurse')->group(function () {
         Route::get("/nurse/painel", [NurseController::class, "board"])->name('nurse.board');
