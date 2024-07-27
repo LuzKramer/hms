@@ -34,6 +34,13 @@ class AuthenticatedSessionController extends Controller
         $userId = Auth::id();
         Session::put('user_id', $userId);
 
+        // img user
+
+        $user = Auth::user();
+        Session::put('user_img', $user->img);
+        Session::put('user_name', $user->name);
+
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

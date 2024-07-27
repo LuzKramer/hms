@@ -41,13 +41,21 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'cpf' => ['required', 'string', 'max:11', 'unique:'.User::class],
+            'cpf' => ['required', 'string', 'max:11', 'unique:' . User::class],
             'job' => ['required', 'integer'],
             'specialization' => ['required', 'integer'],
-            'fone' => ['required', 'string', 'max:15']
+            'fone' => ['required', 'string', 'max:15'],
+            'img' => ['required', 'image', 'mimes:jpeg,png,jpg,svg', 'max:2048'],
         ]);
+
+        if ($request->hasFile('img')) {
+
+            $file = $request->file('img');
+            $filename = md5(time() . $file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('imgdb'), $filename);
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -56,7 +64,8 @@ class RegisteredUserController extends Controller
             'cpf' => $request->cpf,
             'job' => $request->job,
             'specialization' => $request->specialization,
-            'fone' => $request->fone
+            'fone' => $request->fone,
+            'img' => $filename,
 
         ]);
 
